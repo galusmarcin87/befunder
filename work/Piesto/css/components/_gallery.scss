@@ -1,0 +1,43 @@
+.Gallery {
+  padding: 30px;
+  background: $COLOR-20;
+  margin-bottom: 15px;
+  &__active {
+    position: relative;
+    cursor: pointer;
+    img {
+      width: 100%;
+    }
+    &:hover {
+      &::before {
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        content: "\f06e";
+        text-align: center;
+        position: absolute;
+        background: #5ebdc7bd;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        color: $COLOR-3;
+        font-size: 7em;
+        pointer-events: none;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+  &__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 30px;
+    margin-top: 30px;
+    img {
+      cursor: pointer;
+    }
+  }
+}
