@@ -9,7 +9,7 @@ if (YII_ENV == 'prod') {
 
 $config = [
     'id' => 'basic',
-    'name' => 'Piesto',
+    'name' => 'BeFunder ',
     'basePath' => dirname(__DIR__),
     'bootstrap' => $bootstrap,
     'language' => 'pl',

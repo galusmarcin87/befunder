@@ -1,0 +1,43 @@
+.news {
+  &__container {
+    margin-top: 50px;
+    margin-bottom: 25px;
+
+    p {
+      font-size: 13px;
+      line-height: 24px;
+      color: #ffffff;
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+
+    img {
+      margin: 10px 0;
+      width: 100%;
+      border: 1px solid $PRIMARY;
+    }
+
+    a {
+      font-size: 14px;
+      color: $PRIMARY;
+      font-weight: 300;
+    }
+  }
+
+  &__header {
+    font-size: 14px;
+    color: $PRIMARY;
+    font-weight: 700;
+  }
+
+  &__footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: end;
+    text-align: right;
+
+    a {
+      justify-self: flex-start;
+    }
+  }
+}

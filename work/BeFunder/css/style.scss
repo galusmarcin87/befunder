@@ -1,0 +1,98 @@
+@import './variables';
+
+//layout
+@import './layouts/home';
+@import './layouts/slider';
+@import './layouts/footer';
+@import './layouts/benefits';
+@import './layouts/info';
+@import './layouts/news';
+@import './layouts/projects';
+@import './layouts/project';
+@import './layouts/about-us';
+@import './layouts/contact';
+
+//components
+@import './components/navigation';
+@import './components/button';
+@import './components/socials';
+@import './components/newsletter';
+@import './components/counter';
+@import './components/countdown';
+@import './components/pagination';
+@import './components/team';
+@import './components/banner';
+
+html,
+body {
+  font-family: $FONT;
+  background: #000;
+  font-size: 13px;
+  line-height: 24px;
+  color: #ffffff;
+  font-weight: 400;
+}
+
+a {
+  color: $PRIMARY;
+  text-decoration: none;
+
+  &:hover {
+    color: #ffffff;
+  }
+
+  + h5 {
+    margin-top: 5px;
+  }
+}
+
+h2 {
+  font-size: 32px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+h4 {
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: 700;
+  font-family: 'Open Sans';
+  margin-bottom: 25px;
+}
+
+h5 {
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 700;
+  font-family: 'Open Sans';
+  margin-bottom: 15px;
+}
+
+h6 {
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: 700;
+  font-family: 'Open Sans';
+}
+
+p {
+  font-size: 14px;
+  line-height: 18px;
+  color: #ffffff;
+  font-weight: 500;
+  font-family: 'Open Sans';
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 10px;
+
+  @media (min-width: $SM) {
+    padding: 0 15px;
+  }
+}
+
+.section {
+  padding: 50px;
+}

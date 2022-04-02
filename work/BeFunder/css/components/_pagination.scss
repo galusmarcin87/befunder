@@ -1,0 +1,32 @@
+.pagination {
+  background-color: #000;
+  margin: 0 20px;
+  justify-content: center;
+  margin-top: 50px;
+
+  .page-item {
+    width: 100%;
+    &.active {
+      .page-link {
+        color: $PRIMARY;
+        background-color: #000;
+        border: none;
+      }
+    }
+
+    &.disabled {
+      .page-link {
+        background-color: #191919;
+        color: #fff;
+      }
+    }
+  }
+
+  .page-link {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    font-size: 14px;
+    font-weight: 300;
+  }
+}

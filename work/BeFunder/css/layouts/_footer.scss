@@ -1,0 +1,59 @@
+.footer {
+  background-color: #191818;
+  padding: 20px;
+  text-align: left;
+  margin-top: 100px;
+
+  @media (min-width: $MD) {
+    padding: 20px 70px;
+  }
+
+  &__description {
+    @media (min-width: $MD) {
+      padding-right: 50px;
+    }
+  }
+
+  &__menu {
+    padding-top: 30px;
+    border-top: 1px solid #545454;
+    margin-top: 20px;
+
+    ul {
+      list-style-type: none;
+      font-size: 18px;
+      color: #ffffff;
+      font-weight: 400;
+      font-family: 'Open Sans';
+      text-align: left;
+      grid-column-gap: 30px;
+      white-space: nowrap;
+
+      @media (min-width: $MD) {
+        display: flex;
+      }
+    }
+  }
+
+  .social-links {
+    margin-bottom: 20px;
+  }
+
+  h4,
+  h5 {
+    text-transform: uppercase;
+  }
+
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  p {
+    font-size: 13px;
+    line-height: 24px;
+    color: #ffffff;
+    font-weight: 400;
+    font-family: 'Open Sans';
+  }
+}

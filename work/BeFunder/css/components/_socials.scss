@@ -1,0 +1,15 @@
+.social-links {
+  display: inline-flex;
+  grid-column-gap: 10px;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 3px;
+    background-color: #000;
+    color: #fff;
+  }
+}

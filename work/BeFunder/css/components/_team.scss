@@ -1,0 +1,56 @@
+.team {
+  border-radius: 3px;
+  background-color: #191919;
+  padding: 40px;
+  padding-bottom: 15px;
+}
+
+.team-list-wrapper {
+  margin-bottom: 80px;
+  margin-top: 40px;
+
+  p {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+  }
+}
+
+.team-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 30px;
+  margin-top: 35px;
+
+  @media (min-width: $SM) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width: $TABLET) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  &__image {
+    border: 1px solid $PRIMARY;
+    border-radius: 3px;
+  }
+
+  &__header {
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 300;
+    margin-top: 8px;
+    line-height: 16px;
+  }
+
+  &__sub-header {
+    font-size: 13px;
+    color: #ffffff;
+    font-weight: 300;
+    margin-bottom: 20px;
+    line-height: 18px;
+  }
+
+  &__item {
+  }
+}

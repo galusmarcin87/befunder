@@ -1,0 +1,43 @@
+.info {
+  padding: 25px 0;
+
+  &__content {
+    text-align: justify;
+    font-size: 16px;
+    line-height: 28px;
+
+    &--left {
+      @media (min-width: $MD) {
+        padding-right: 50px;
+      }
+    }
+
+    &--right {
+      @media (min-width: $MD) {
+        padding-left: 50px;
+      }
+    }
+  }
+
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  p {
+    text-align: justify;
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  .button {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    min-width: 142px;
+    text-align: center;
+    display: inline-grid;
+  }
+}

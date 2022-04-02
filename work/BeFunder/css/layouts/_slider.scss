@@ -1,0 +1,62 @@
+.slider {
+  color: #fff;
+  text-align: center;
+  padding: 50px 0;
+
+  &__header {
+    font-size: 24px;
+    margin-bottom: 20px;
+
+    @media (min-width: $MD) {
+      font-size: 28px;
+    }
+  }
+
+  &__content {
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+
+  &__logo {
+    display: block;
+    margin-bottom: 40px;
+  }
+
+  .button {
+    margin: 20px 0;
+  }
+
+  .carousel {
+    margin-bottom: 50px;
+  }
+
+  .carousel-item {
+    border: 1px solid $PRIMARY;
+    padding: 20px;
+    padding-top: 10px;
+    justify-content: center;
+    background-position: center;
+    background-size: cover;
+  }
+  .carousel-item {
+    border-radius: 1px;
+  }
+}
+
+.carousel-indicators {
+  top: 100%;
+  padding: 10px 0;
+
+  [data-bs-target] {
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    display: inline-flex;
+    background-color: $PRIMARY;
+    opacity: 0.8;
+
+    &.active {
+      opacity: 1;
+    }
+  }
+}

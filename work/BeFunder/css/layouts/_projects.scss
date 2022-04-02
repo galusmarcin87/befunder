@@ -1,0 +1,19 @@
+.projects {
+  .news__item {
+    padding: 0 20px;
+    margin-top: 40px;
+  }
+  .counter-body {
+    padding: 3px 8px;
+    background-color: #191919;
+    margin-bottom: 10px;
+  }
+}
+
+.projects-wrapper {
+  + footer {
+    .footer {
+      margin-top: 50px;
+    }
+  }
+}
