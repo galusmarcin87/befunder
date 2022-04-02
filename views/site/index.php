@@ -6,6 +6,9 @@ use app\components\mgcms\MgHelpers;
 use app\models\mgcms\db\Project;
 
 ?>
+
+<?= $this->render('index/slider') ?>
+
 <section
         class="Section Projects animatedParent"
         style="padding-bottom: 75px"

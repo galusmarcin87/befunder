@@ -32,7 +32,7 @@ class MgCmsController extends Controller
         if (Yii::$app->request->post('LoginForm')) {
             $model = new LoginForm();
             if ($model->load(Yii::$app->request->post()) && $model->login()) {
-                return $this->redirect('/');
+                return $this->redirect('/admin');
             }
         }
     }

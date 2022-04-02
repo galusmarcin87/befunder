@@ -1,6 +1,18 @@
 Change Log: `bootstrap-popover-x`
 =================================
 
+## Version 1.5.1
+
+**Date:** 25-Sep-2021
+
+- (bug #46): Correct android keyboard disappearing issue in popover-x embedded inputs.
+
+## Version 1.5.0
+
+**Date:** 19-Sep-2021
+
+- Simplify NPM module handling.
+
 ## Version 1.4.9
 
 **Date:** 11-Sep-2021

@@ -25,7 +25,7 @@ $arr = [
 
 
 
-
+    'Link label' => 'Tekst linku',
     'Projects' => 'Projekty',
     'Project' => 'Projekt',
     'Create Project' => 'Dodaj Projekt',

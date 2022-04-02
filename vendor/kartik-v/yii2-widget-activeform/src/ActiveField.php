@@ -1,16 +1,17 @@
 <?php
 
 /**
- * @copyright  Copyright &copy; Kartik Visweswaran, Krajee.com, 2015 - 2021
+ * @copyright  Copyright &copy; Kartik Visweswaran, Krajee.com, 2015 - 2022
  * @package    yii2-widgets
  * @subpackage yii2-widget-activeform
- * @version    1.6.0
+ * @version    1.6.2
  */
 
 namespace kartik\form;
 
 use Exception;
 use kartik\base\Config;
+use kartik\base\Lib;
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -21,9 +22,9 @@ use yii\widgets\ActiveField as YiiActiveField;
 /**
  * ActiveField represents a form input field within an [[ActiveForm]] and extends the [[YiiActiveField]] component
  * to handle various bootstrap functionality like form types, input groups/addons, toggle buttons, feedback icons, and
- * other enhancements
+ * other enhancements.
  *
- * Usage example with addons:
+ * For example,
  *
  * ```php
  * // $form is your active form instance
@@ -283,22 +284,6 @@ class ActiveField extends YiiActiveField
     public $checkWrapperOptions = [];
 
     /**
-     * @var array addon options for text and password inputs. The following settings can be configured:
-     * - `prepend`: _array_, the prepend addon configuration
-     *      - `content`: _string_, the prepend addon content
-     *      - `asButton`: _boolean_, whether the addon is a button or button group. Defaults to false.
-     *      - `options`: _array_, the HTML attributes to be added to the container.
-     * - `append`: _array_, the append addon configuration
-     *      - `content`: _string_|_array_, the append addon content
-     *      - `asButton`: _boolean_, whether the addon is a button or button group. Defaults to false.
-     *      - `options`: _array_, the HTML attributes to be added to the container.
-     * - `groupOptions`: _array_, HTML options for the input group
-     * - `contentBefore`: _string_, content placed before addon
-     * - `contentAfter`: _string_, content placed after addon
-     */
-    public $addon = [];
-
-    /**
      * @var bool whether to highlight error and success states on input group addons automatically
      */
     public $highlightAddon = true;
@@ -493,7 +478,7 @@ class ActiveField extends YiiActiveField
         $layout = $form->type;
         $bsVer = $form->getBsVer();
         $config = [
-            'hintOptions' => ['tag' => 'div', 'class' => ['form-text', 'text-muted', 'small']],
+            'hintOptions' => ['tag' => 'div', 'class' => ['hint-block']],
             'errorOptions' => ['tag' => 'div', 'class' => 'invalid-feedback'],
             'inputOptions' => ['class' => 'form-control'],
             'labelOptions' => ['class' => ['form-label']],
@@ -502,11 +487,7 @@ class ActiveField extends YiiActiveField
         if ($bsVer === 4) {
             $config['labelOptions'] = ['class' => []];
         } elseif ($bsVer === 3) {
-            $config = [
-                'hintOptions' => ['tag' => 'p', 'class' => ['help-block']],
-                'errorOptions' => ['tag' => 'p', 'class' => 'help-block help-block-error'],
-                'inputOptions' => ['class' => 'form-control'],
-            ];
+            $config['errorOptions'] = ['tag' => 'div', 'class' => 'help-block help-block-error'];
         }
         if ($layout === ActiveForm::TYPE_HORIZONTAL) {
             $config['template'] = "{label}\n{beginWrapper}\n{input}\n{error}\n{hint}\n{endWrapper}";
@@ -662,13 +643,11 @@ class ActiveField extends YiiActiveField
     {
         if ($this->getConfigParam('showHints') === false) {
             $this->parts['{hint}'] = '';
-
             return $this;
         }
         if ($this->_isHintSpecial) {
             Html::addCssClass($options, 'kv-hint-block');
         }
-
         return parent::hint($this->generateHint($content), $options);
     }
 
@@ -745,13 +724,13 @@ class ActiveField extends YiiActiveField
             Html::addCssClass($opts, $this->getHintIconCss('Label'));
             $label = Html::tag('span', $label, $opts);
             if ($this->getHintData('showIcon') && !$this->getHintData('iconBesideInput')) {
-                $label = strtr(
+                $label = Lib::strtr(
                     $this->getHintData('labelTemplate'),
                     ['{label}' => $label, '{help}' => $this->getHintIcon()]
                 );
             }
         }
-        if (strpos($this->template, '{beginLabel}') !== false) {
+        if (Lib::strpos($this->template, '{beginLabel}') !== false) {
             $this->renderLabelParts($label, $options);
         }
         if ($this->_offset) {
@@ -777,11 +756,12 @@ class ActiveField extends YiiActiveField
 
     /**
      * Gets custom CSS for custom controls supported in bootstrap 4.x and 5.x
-     * @param string $type
+     * @param  string  $type
      * @return string
      * @throws Exception
      */
-    protected function getCustomCss($type) {
+    protected function getCustomCss($type)
+    {
         return $this->form->isBs(5) ? "form-{$type}" : "custom-{$type}";
     }
 
@@ -882,7 +862,7 @@ class ActiveField extends YiiActiveField
             if ($content === null && !isset($this->parts['{hint}']) && !isset($this->hintOptions['hint'])) {
                 $this->hintOptions['hint'] = $this->generateHint();
             }
-            $this->template = strtr($this->template, ['{hint}' => $this->_settings['hint']]);
+            $this->template = Lib::strtr($this->template, ['{hint}' => $this->_settings['hint']]);
         }
 
         if ($this->form->staticOnly === true) {
@@ -945,7 +925,7 @@ class ActiveField extends YiiActiveField
      */
     public function staticInput($options = [])
     {
-        $content = $this->staticValue ?? Html::getAttributeValue($this->model, $this->attribute);
+        $content = isset($this->staticValue) ? $this->staticValue : Html::getAttributeValue($this->model, $this->attribute);
         $this->form->addCssClass($options, ActiveForm::BS_FORM_CONTROL_STATIC);
         $this->parts['{input}'] = Html::tag('div', $content, $options);
         $this->_isStatic = true;
@@ -1187,7 +1167,7 @@ class ActiveField extends YiiActiveField
      */
     protected function getConfigParam($param, $default = true)
     {
-        return $this->$param ?? ArrayHelper::getValue($this->form->formConfig, $param, $default);
+        return isset($this->$param) ? $this->$param : ArrayHelper::getValue($this->form->formConfig, $param, $default);
     }
 
     /**
@@ -1311,7 +1291,7 @@ class ActiveField extends YiiActiveField
             Html::addCssClass($this->options, 'row');
         }
         // check horizontalCssClasses['wrapper'] if there is a col- class
-        if (isset($hor['wrapper']) && strpos($hor['wrapper'], 'col-') !== false) {
+        if (isset($hor['wrapper']) && Lib::strpos($hor['wrapper'], 'col-') !== false) {
             $span = '';
         }
         if (empty($span) && !isset($hor['wrapper'])) {
@@ -1589,12 +1569,12 @@ class ActiveField extends YiiActiveField
             Html::addCssClass($this->options, 'hide-errors');
         }
         if (!empty($this->_multiselect)) {
-            $input = str_replace('{input}', $this->_multiselect, $input);
+            $input = Lib::str_replace('{input}', $this->_multiselect, $input);
         }
         if ($this->_isHintSpecial && $this->getHintData('iconBesideInput') && $this->getHintData('showIcon')) {
             $id = $this->_hintPopoverContainer ? ' id="'.$this->_hintPopoverContainer.'"' : '';
-            $help = strtr($this->getHintData('inputTemplate'), ['{help}' => $this->getHintIcon(), '{id}' => $id,]);
-            $input = str_replace('{input}', $help, $input);
+            $help = Lib::strtr($this->getHintData('inputTemplate'), ['{help}' => $this->getHintIcon(), '{id}' => $id,]);
+            $input = Lib::str_replace('{input}', $help, $input);
         }
         $newInput = $this->contentBeforeInput.$this->generateAddon().$this->renderFeedbackIcon().
             $this->contentAfterInput;
@@ -1604,10 +1584,10 @@ class ActiveField extends YiiActiveField
             '{endLabel}' => $showLabels ? '{endLabel}' : "",
             '{label}' => $showLabels ? "{$this->contentBeforeLabel}{label}{$this->contentAfterLabel}" : "",
             '{labelTitle}' => $showLabels ? "{$this->contentBeforeLabel}{labelTitle}{$this->contentAfterLabel}" : "",
-            '{input}' => str_replace('{input}', $newInput, $input),
-            '{error}' => $showErrors ? str_replace('{error}', $newError, $error) : '',
+            '{input}' => Lib::str_replace('{input}', $newInput, $input),
+            '{error}' => $showErrors ? Lib::str_replace('{error}', $newError, $error) : '',
         ];
-        $this->template = strtr($this->template, $config);
+        $this->template = Lib::strtr($this->template, $config);
     }
 
     /**
@@ -1759,7 +1739,7 @@ class ActiveField extends YiiActiveField
         $disabled = ArrayHelper::remove($options, 'disabledItems', []);
         $readonly = ArrayHelper::remove($options, 'readonlyItems', []);
         $cust = $this->isCustomControl($options);
-        $pre = $cust && !$isBs5 ? 'custom-control' : 'form-check';
+        $pre = $cust ? ($isBs5 ? 'form-check' : 'custom-control') : ($notBs3 ? "me-1 mr-1 bs-{$type}" : '');
         if ($asBtnGrp) {
             $css = ['btn-group'];
             if (!$isBs5) {
@@ -1802,7 +1782,7 @@ class ActiveField extends YiiActiveField
                 $options
             ) {
                 $id = isset($options['id']) ? $options['id'].'-'.$index :
-                    strtolower(preg_replace('/[^a-zA-Z0-9=\s—–-]+/u', '-', $name)).'-'.$index;
+                    Lib::strtolower(Lib::preg_replace('/[^a-zA-Z0-9=\s—–-]+/u', '-', $name)).'-'.$index;
                 $opts += [
                     'data-index' => $index,
                     'value' => $value,

@@ -561,6 +561,7 @@ return array(
     'PharIo\\Version\\VersionConstraintParser' => $vendorDir . '/phar-io/version/src/VersionConstraintParser.php',
     'PharIo\\Version\\VersionConstraintValue' => $vendorDir . '/phar-io/version/src/VersionConstraintValue.php',
     'PharIo\\Version\\VersionNumber' => $vendorDir . '/phar-io/version/src/VersionNumber.php',
+    'PhpToken' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
     'SassBoolean' => $vendorDir . '/richthegeek/phpsass/script/literals/SassBoolean.php',
     'SassBooleanException' => $vendorDir . '/richthegeek/phpsass/script/literals/SassLiteralExceptions.php',
     'SassColour' => $vendorDir . '/richthegeek/phpsass/script/literals/SassColour.php',

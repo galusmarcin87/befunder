@@ -3,14 +3,15 @@
 /**
  * @package   yii2-grid
  * @author    Kartik Visweswaran <kartikv2@gmail.com>
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2021
- * @version   3.3.6
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2022
+ * @version   3.5.0
  */
 
 namespace kartik\grid;
 
 use Closure;
 use kartik\base\Config;
+use kartik\base\Lib;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
@@ -20,17 +21,6 @@ use yii\web\View;
 
 /**
  * ColumnTrait maintains generic methods used by all column widgets in [[GridView]].
- *
- * @property array $options
- * @property array $headerOptions
- * @property array $filterOptions
- * @property array $footerOptions
- * @property array $contentOptions
- * @property string $footer
- * @property GridView $grid
- * @property string $format
- * @method getDataCellValue($model, $key, $index)
- * @method renderCell()
  *
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since 1.0
@@ -258,8 +248,8 @@ trait ColumnTrait
         if (isset($this->xlFormat)) {
             $fmt = $this->xlFormat;
         } elseif ($autoFormat && isset($this->format)) {
-            $tSep = $formatter->thousandSeparator ?? ',';
-            $dSep = $formatter->decimalSeparator ?? '.';
+            $tSep = isset($formatter->thousandSeparator) ? $formatter->thousandSeparator : ',';
+            $dSep = isset($formatter->decimalSeparator) ? $formatter->decimalSeparator : '.';
             switch ($format) {
                 case 'text':
                 case 'html':
@@ -278,7 +268,7 @@ trait ColumnTrait
                 case 'percent':
                 case 'scientific':
                     $decimals = is_array($this->format) && isset($this->format[1]) ? $this->format[1] : 2;
-                    $append = $decimals > 0 ? "\\{$dSep}" . str_repeat('0', $decimals) : '';
+                    $append = $decimals > 0 ? "\\{$dSep}" . Lib::str_repeat('0', $decimals) : '';
                     if ($format == 'percent') {
                         $append .= '%';
                     }
@@ -291,7 +281,7 @@ trait ColumnTrait
                     break;
                 case 'date':
                 case 'time':
-                    $fmt = 'Short ' . ucfirst($format);
+                    $fmt = 'Short ' . Lib::ucfirst($format);
                     break;
                 case 'datetime':
                     $fmt = 'yyyy\-MM\-dd HH\:mm\:ss';
@@ -333,7 +323,7 @@ trait ColumnTrait
         }
         $content = $this->getPageSummaryCellContent();
         if ($this->pageSummary === true) {
-            $format = $this->pageSummaryFormat ?? $this->format;
+            $format = isset($this->pageSummaryFormat) ? $this->pageSummaryFormat : $this->format;
             return $this->grid->formatter->format($content, $format);
         }
         return ($content === null) ? $this->grid->emptyCell : $content;
@@ -440,13 +430,6 @@ trait ColumnTrait
      */
     protected function parseFormat()
     {
-        $format = isset($this->format) ? (array)$this->format : [];
-        if (!empty($format)) {
-            $fmt = $format[0];
-            if (in_array($fmt, ['integer', 'decimal', 'percent', 'scientific', 'currency', 'length', 'weight'])) {
-                Html::addCssClass($this->headerOptions, ['sort-numerical']);
-            }
-        }
         if ($this->isValidAlignment()) {
             $class = "kv-align-{$this->hAlign}";
             Html::addCssClass($this->headerOptions, $class);
@@ -464,7 +447,7 @@ trait ColumnTrait
             Html::addCssClass($this->pageSummaryOptions, $class);
             Html::addCssClass($this->footerOptions, $class);
         }
-        if (trim($this->width) != '') {
+        if (Lib::trim($this->width) != '') {
             Html::addCssStyle($this->headerOptions, "width:{$this->width};");
             Html::addCssStyle($this->pageSummaryOptions, "width:{$this->width};");
             Html::addCssStyle($this->footerOptions, "width:{$this->width};");
@@ -533,7 +516,7 @@ trait ColumnTrait
         if ($this->isValidAlignment('vAlign')) {
             Html::addCssClass($options, "kv-align-{$this->vAlign}");
         }
-        if (trim($this->width) != '') {
+        if (Lib::trim($this->width) != '') {
             Html::addCssStyle($options, "width:{$this->width};");
         }
         $options['data-col-seq'] = array_search($this, $this->grid->columns);

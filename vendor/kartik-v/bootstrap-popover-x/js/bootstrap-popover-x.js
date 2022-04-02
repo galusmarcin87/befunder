@@ -1,6 +1,6 @@
 /*!
  * @copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2021
- * @version 1.4.9
+ * @version 1.5.1
  *
  * Bootstrap Popover Extended - Popover with modal behavior, styling enhancements and more.
  *
@@ -10,18 +10,18 @@
 (function (factory) {
     'use strict';
     if (typeof define === 'function' && define.amd) {
-        define(['jquery', 'window', 'document'], factory);
+        define(['jquery'], factory);
     } else if (typeof module === 'object' && typeof module.exports === 'object') {
-        factory(require('jquery'), window, document);
+        factory(require('jquery'));
     } else {
-        factory(window.jQuery, window, document);
+        factory(window.jQuery);
     }
-}(function ($, window, document, undefined) {
+}(function ($) {
     'use strict';
 
     if (!$.fn.popoverXBsVersion) {
-        $.fn.popoverXBsVersion = (window.Modal && window.Modal.VERSION) ||
-            (window.bootstrap && window.bootstrap.Modal && bootstrap.Modal.VERSION) || '3.x.x';
+        $.fn.popoverXBsVersion = (window.bootstrap && window.bootstrap.Modal && bootstrap.Modal.VERSION) ||
+            (window.Modal && window.Modal.VERSION) || '3.x.x';
     }
 
     var $h, PopoverButton, PopoverX;
@@ -237,9 +237,10 @@
                     });
                 }
             }
-
             $(window).resize(function () {
-                if ($dialog.hasClass('kv-popover-active')) {
+                var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) ||
+                    (navigator.msMaxTouchPoints > 0);
+                if (!isTouch && $dialog.hasClass('kv-popover-active')) {
                     self.hide();
                     setTimeout(function () {
                         self.show(true);

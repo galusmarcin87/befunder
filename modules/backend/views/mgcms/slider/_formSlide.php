@@ -25,6 +25,7 @@ echo TabularForm::widget([
     'attributes' => [
         "id" => app\components\mgcms\MgHelpers::getCRUDIdColumn(),
         'name' => ['type' => TabularForm::INPUT_TEXT, 'label' => $model->getAttributeLabel('name')],
+        'link' => ['type' => TabularForm::INPUT_TEXT, 'label' => $model->getAttributeLabel('link')],
         'header' => ['type' => TabularForm::INPUT_TEXT, 'label' => $model->getAttributeLabel('header')],
         'subheader' => ['type' => TabularForm::INPUT_TEXT, 'label' => $model->getAttributeLabel('subheader')],
         'body' => ['type' => TabularForm::INPUT_TEXTAREA, 'label' => $model->getAttributeLabel('body')],

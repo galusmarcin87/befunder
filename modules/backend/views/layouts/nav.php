@@ -16,7 +16,7 @@ NavBar::begin([
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav navbar-right'],
     'items' => [
-//        ['label' => T::t('Sliders'), 'url' => '/backend/mgcms/slider', 'visible' => MgHelpers::checkAccess('slider', 'index')],
+       ['label' => T::t('Sliders'), 'url' => '/backend/mgcms/slider', 'visible' => MgHelpers::checkAccess('slider', 'index')],
 //        ['label' => T::t('Team Members'), 'url' => '/backend/mgcms/team-member', 'visible' => MgHelpers::checkAccess('team-member', 'index')],
         ['label' => T::t('Faq'), 'url' => '/backend/mgcms/faq', 'visible' => MgHelpers::checkAccess('faq', 'index')],
         ['label' => T::t('Projects'), 'url' => '/backend/mgcms/project', 'visible' => MgHelpers::checkAccess('project', 'index')],

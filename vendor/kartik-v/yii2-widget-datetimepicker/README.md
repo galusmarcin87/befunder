@@ -6,10 +6,12 @@
     yii2-widget-datetimepicker
     <hr>
     <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DTP3NZQ6G2AYU"
-       title="Donate via Paypal" target="_blank">
-        <img src="http://kartik-v.github.io/bootstrap-fileinput-samples/samples/donate.png" alt="Donate"/>
-    </a>
+       title="Donate via Paypal" target="_blank"><img height="90" src="https://kartik-v.github.io/bootstrap-fileinput-samples/samples/donate.png" alt="Donate"/></a>
+    &nbsp; &nbsp; &nbsp;
+    <a href="https://www.buymeacoffee.com/kartikv" title="Buy me a coffee" ><img align="top" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" align="top" height="50" alt="kartikv" style="margin-top:15px"/></a>
 </h1>
+
+<div align="center">
 
 [![Stable Version](https://poser.pugx.org/kartik-v/yii2-widget-datetimepicker/v/stable)](https://packagist.org/packages/kartik-v/yii2-widget-datetimepicker)
 [![Untable Version](https://poser.pugx.org/kartik-v/yii2-widget-datetimepicker/v/unstable)](https://packagist.org/packages/kartik-v/yii2-widget-datetimepicker)
@@ -17,6 +19,8 @@
 [![Total Downloads](https://poser.pugx.org/kartik-v/yii2-widget-datetimepicker/downloads)](https://packagist.org/packages/kartik-v/yii2-widget-datetimepicker)
 [![Monthly Downloads](https://poser.pugx.org/kartik-v/yii2-widget-datetimepicker/d/monthly)](https://packagist.org/packages/kartik-v/yii2-widget-datetimepicker)
 [![Daily Downloads](https://poser.pugx.org/kartik-v/yii2-widget-datetimepicker/d/daily)](https://packagist.org/packages/kartik-v/yii2-widget-datetimepicker)
+
+</div>
 
 The DateTimePicker widget is a Yii 2 wrapper for the [Bootstrap DateTimePicker plugin](http://www.malot.fr/bootstrap-datetimepicker) with various enhancements. The plugin is a fork of the DateTimePicker plugin by @eternicode and adds the time functionality. The widget is similar to the DateTimePicker widget in most aspects, except that it adds the time functionality and does not support ranges. The widget is specially styled for Yii framework 2.0 and Bootstrap 3 and allows graceful degradation to a normal HTML text input, if the browser does not support JQuery. The widget supports these markups:
 
@@ -52,7 +56,7 @@ to the ```require``` section of your `composer.json` file.
 
 ## Demo
 
-You can refer detailed [documentation and demos](http://demos.krajee.com/widget-details/datetimepicker) on usage of the extension.
+You can refer detailed [documentation and demos](http://demos.krajee.com/widget-details/datetimepicker) and [API Documentation](https://docs.krajee.com/kartik-datetime-datetimepicker) on usage of the extension.
 
 ## Usage
 

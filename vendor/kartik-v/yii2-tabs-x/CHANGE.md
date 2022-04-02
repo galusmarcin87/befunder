@@ -1,6 +1,13 @@
 Change Log: `yii2-tabs-x`
 =========================
 
+## Version 1.2.8
+
+**Date:** 20-Sep-2021
+
+- (enh #74): Enhancements to support Bootstrap 5.x.
+- Bump up version.
+
 ## Version 1.2.7
 
 **Date:** 26-Sep-2018
