@@ -21,18 +21,4 @@ use app\models\mgcms\db\Project;
 </section>
 
 
-<?= $this->render('index/section1') ?>
-
-<?= $this->render('index/section2') ?>
-
-<?= $this->render('index/section3') ?>
-3
-<?= $this->render('/common/movies') ?>
-
-<?= $this->render('/common/news') ?>
-
-<?= $this->render('/common/team') ?>
-
-<?= $this->render('index/cooperateWith') ?>
-
-<?= $this->render('/common/faq') ?>
+<?= $this->render('index/benefits') ?>
