@@ -9,23 +9,18 @@ use app\models\mgcms\db\Project;
 
 <?= $this->render('index/slider') ?>
 
-<section
-        class="Section Projects animatedParent"
-        style="padding-bottom: 75px"
->
-    <div class="container fadeIn animated">
 
-        <div class="Projects__header__wrapper">
-            <h4 class="Projects__header text-center"><?= Yii::t('db', 'Current projects'); ?></h4>
-            <a href="<?= \yii\helpers\Url::to(['project/index']) ?>" class="btn btn--transparent btn--medium">
-                <?= Yii::t('db', 'SEE ALL'); ?>
-            </a>
-        </div>
-
+<section class="news">
+    <div class="container">
         <?= $this->render('/common/projects') ?>
-
-
+        <div class="text-center">
+            <a href="<?= \yii\helpers\Url::to(['project/index']) ?>"
+               class="button"> <?= Yii::t('db', 'all projects'); ?> </a>
+        </div>
+    </div>
 </section>
+
+
 <?= $this->render('index/section1') ?>
 
 <?= $this->render('index/section2') ?>
