@@ -23,4 +23,6 @@ use app\models\mgcms\db\Project;
 
 <?= $this->render('index/benefits') ?>
 
-<?= $this->render('index/section1') ?>
+<?= $this->render('index/section1') ?>3
+
+<?= $this->render('index/news') ?>
