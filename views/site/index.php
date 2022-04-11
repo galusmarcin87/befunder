@@ -22,3 +22,5 @@ use app\models\mgcms\db\Project;
 
 
 <?= $this->render('index/benefits') ?>
+
+<?= $this->render('index/section1') ?>
