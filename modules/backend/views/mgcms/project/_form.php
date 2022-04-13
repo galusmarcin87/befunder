@@ -174,13 +174,14 @@ yii\jui\JuiAsset::register($this);
             ]); ?>
         <?endif?>
 
-        <?= $form->field3md($model, 'fiber_collect_id')->textInput(['placeholder' => '']) ?>
-        <?= $form->field3md($model, 'iban')->textInput(['placeholder' => '']) ?>
-        <?= $form->field3md($model, 'pay_name')->textInput(['placeholder' => '']) ?>
-        <?= $form->field3md($model, 'pay_description')->textInput(['placeholder' => '']) ?>
+
 
 
         <div class="hidden">
+            <?= $form->field3md($model, 'fiber_collect_id')->textInput(['placeholder' => '']) ?>
+            <?= $form->field3md($model, 'iban')->textInput(['placeholder' => '']) ?>
+            <?= $form->field3md($model, 'pay_name')->textInput(['placeholder' => '']) ?>
+            <?= $form->field3md($model, 'pay_description')->textInput(['placeholder' => '']) ?>
             <?= $form->field12md($model, 'buy_token_info')->tinyMce(['rows' => 6]) ?>
         </div>
 

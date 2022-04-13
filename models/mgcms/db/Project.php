@@ -71,7 +71,7 @@ class Project extends \app\models\mgcms\db\AbstractRecord
     public function rules()
     {
         return [
-            [['name', 'file_id', 'pay_name', 'iban','pay_description'], 'required'],
+            [['name', 'file_id'], 'required'],
             [['gps_lat', 'gps_long', 'money', 'money_full', 'percentage', 'percentage_presale_bonus'], 'number'],
             [['lead', 'text', 'text2', 'buy_token_info', 'fiber_collect_id','iban','pay_description','pay_name'], 'string'],
             [['file_id', 'token_value', 'token_to_sale', 'token_minimal_buy', 'token_left', 'flag_id', 'created_by', 'value'], 'integer'],
