@@ -1,3 +1,9 @@
 .disabled {
   display: none;
 }
+.login-register form .checkbox {
+  font-size: 9px;
+  color: #edecef;
+  font-weight: 400;
+  margin-top: 15px;
+}

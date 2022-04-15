@@ -41,7 +41,7 @@ class RegisterForm extends Model
                 'special' => 0,
                 'userAttribute' => 'username'],
             ['passwordRepeat', 'compare', 'compareAttribute' => 'password', 'message' => Yii::t('db', "Passwords don't match")],
-            [['acceptTerms', 'acceptTerms2', 'acceptTerms3', 'acceptTerms4'], 'required', 'requiredValue' => 1, 'message' => Yii::t('db', 'This field is required')],
+            [['acceptTerms'], 'required', 'requiredValue' => 1, 'message' => Yii::t('db', 'This field is required')],
             ['username', 'email'],
             [['phone', 'acceptTerms5', 'acceptTerms6'], 'safe'],
 //        [['password'], StrengthValidator::className(), 'min' => 8, 'digit' => 1, 'special' => 1, 'upper' => 1, 'lower' => 1, 'userAttribute' => 'username'],

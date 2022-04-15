@@ -10,61 +10,69 @@ use app\components\mgcms\MgHelpers;
 
 $this->title = Yii::t('db', 'Register');
 $this->params['breadcrumbs'][] = $this->title;
-
+$fieldConfig = \app\components\ProjectHelper::getFormFieldConfig(true);
 
 ?>
-
-<?= $this->render('/common/breadcrumps') ?>
-
-
-<section class="Section Section--white Register animatedParent">
-    <div class="container fadeIn animated">
-        <h2 class="text-center">
-            <?= Yii::t('db', 'Provide Your information to register account'); ?>
-        </h2>
-        <div class="User-Panel__form User-Panel__form--block">
-            <div>
+<section class="login-register">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
                 <?php
                 $form = ActiveForm::begin([
-                    'id' => 'login-form',
-                    'class' => 'fadeInUpShort animated delay-250',
-                    'fieldConfig' => \app\components\ProjectHelper::getFormFieldConfig()
+                    'id' => 'contact__form',
+                    'fieldConfig' => $fieldConfig,
+                    'options' => ['class' => 'contact__form']
                 ]);
 
-                //          echo $form->errorSummary($model);
+                echo $form->errorSummary($model);
                 ?>
-                <div class="User-Panel__form-group">
-                    <?= $form->field($model, 'firstName')->textInput(['placeholder' => ' ']) ?>
-                    <?= $form->field($model, 'surname')->textInput(['placeholder' => ' ']) ?>
-                </div>
-                <div class="User-Panel__form-group">
-                    <?= $form->field($model, 'username')->textInput(['placeholder' => ' ']) ?>
-                    <?= $form->field($model, 'phone')->textInput(['placeholder' => ' ']) ?>
-                </div>
-                <div class="User-Panel__form-group">
-                    <?= $form->field($model, 'password')->passwordInput(['placeholder' => ' ']) ?>
-                    <?= $form->field($model, 'passwordRepeat')->passwordInput(['placeholder' => ' ']) ?>
-                </div>
-                <div class="Form__group form-group text-left checkbox">
-                    <?= $form->field($model, 'acceptTerms',
-                        [
-                            'checkboxTemplate' => "{input}\n" . $model->getAttributeLabel('acceptTerms') . "\n{error}",
-                        ]
-                    )->checkbox() ?>
-                </div>
 
+                <?= $this->render('login/_buttons') ?>
+                <?= $form->field($model, 'username')->textInput(['type' => 'text', 'required' => true, 'placeholder' => $model->getAttributeLabel('username')]) ?>
 
-                <div class="text-center">
-                    <input
-                            style="margin-top: 0;margin-bottom: 35px;"
-                            type="submit"
-                            class="btn btn-success"
-                            value="<?= Yii::t('db', 'REGISTER'); ?>"
-                    />
+                <div class="row">
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'firstName')->textInput(['type' => 'text', 'required' => true, 'placeholder' => $model->getAttributeLabel('firstName')]) ?>
+                    </div>
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'surname')->textInput(['type' => 'text', 'required' => true, 'placeholder' => $model->getAttributeLabel('surname')]) ?>
+                    </div>
                 </div>
-
+                <div class="row">
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'password')->textInput(['type' => 'password', 'required' => true, 'placeholder' => $model->getAttributeLabel('password')]) ?>
+                    </div>
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'passwordRepeat')->textInput(['type' => 'password', 'required' => true, 'placeholder' => $model->getAttributeLabel('passwordRepeat')]) ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="check">
+                        <input type="hidden" name="RegisterForm[acceptTerms]" value="0">
+                        <input type="checkbox" name="RegisterForm[acceptTerms]" value="1"/>
+                        <?= $model->getAttributeLabel('acceptTerms') ?>
+                    </label>
+                    <div class="col-md-6">
+                        <input class="button" type="submit" onclick="return checkTerms()" value="<?= Yii::t('db', 'Register') ?>"/>
+                    </div>
+                </div>
                 <?php ActiveForm::end(); ?>
             </div>
+            <?= $this->render('login/_rightColumn') ?>
         </div>
     </div>
 </section>
+
+
+<script>
+    function checkTerms(){
+        const reqTerms = ['acceptTerms'];
+        let alertSent = false;
+        for(var i = 0; i < reqTerms.length; i++){
+            if(!$('[name="RegisterForm['+reqTerms[i]+']"]').is(':checked') && !alertSent){
+                alertSent = true;
+                alert('<?= Yii::t('db', 'Check required terms') ?>');
+            }
+        }
+    }
+</script>
