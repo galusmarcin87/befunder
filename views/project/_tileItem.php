@@ -11,7 +11,7 @@ $model->language = Yii::$app->language;
 
 <div class="news__header"><?= $model->name ?></div>
 <? if ($model->file && $model->file->isImage()): ?>
-    <img src="<?= $model->file->getImageSrc(455, 303); ?>" alt=""/>
+    <img src="<?= $model->file->getImageSrc(388, 174); ?>" alt=""/>
 <? endif; ?>
 <p>
     <?= Yii::t('db', 'Localization') ?>: <?= $model->localization ?>

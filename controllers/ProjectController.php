@@ -30,6 +30,9 @@ class ProjectController extends \app\components\mgcms\MgCmsController
 
         $dataProvider = new ActiveDataProvider([
             'query' => Project::find()->where(['status' => [Project::STATUS_ACTIVE, Project::STATUS_PLANNED]]),
+            'pagination' => [
+                'pageSize' => 3,
+            ],
         ]);
 
         return $this->render('index', [
