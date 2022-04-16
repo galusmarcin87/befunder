@@ -22,15 +22,15 @@ class DefaultController extends MgBackendController
 
   public function actionLogin()
   {
-//    if (!Yii::$app->user->isGuest) {
-//      //return $this->redirect('/backend/default');
-//    }
+    if (!Yii::$app->user->isGuest) {
+      //return $this->redirect('/backend/default');
+    }
 
 
     $model = new LoginForm();
-//    if ($model->load(Yii::$app->request->post())) {
-//        //return $this->redirect('/backend/default');
-//    }
+    if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        return $this->redirect('/backend/default');
+    }
     return $this->render('login', [
             'model' => $model,
     ]);
