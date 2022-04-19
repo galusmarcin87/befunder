@@ -12,124 +12,36 @@ $this->title = MgHelpers::getSettingTranslated('contact_header', 'Contact');
 
 ?>
 
-<?= $this->render('/common/breadcrumps') ?>
+<section class="contact">
+    <div class="container">
+        <div id="MAP" class="contact__map"></div>
+        <?php
+        $form = ActiveForm::begin([
+            'id' => 'contact-form',
+            'fieldConfig' => \app\components\ProjectHelper::getFormFieldConfig(false),
+            'options' => [
+                'class' => 'contact__form'
+            ]
+        ]);
 
-<section class="Section Section--big-padding-top Contact animatedParent">
-    <div class="container fadeIn animated">
-        <div class="text-center"><b><?= Yii::t('db', 'CONTACT'); ?></b></div>
-        <h1 class="text-center"><?= Yii::t('db', 'Write or call us'); ?></h1>
-        <div class="row">
-            <div class="col-lg-6">
-                <strong><?= Yii::t('db', 'ADDRESS'); ?></strong>
-                <div class="Contact__desc">
-                    <?= MgHelpers::getSetting('contact_address', false, 'Marszałkowska 126/134, 00-008 Warszawa') ?>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <strong><?= Yii::t('db', 'PHONE'); ?></strong>
-                <div class="Contact__desc">
-                    <? $phone = MgHelpers::getSetting('contact_phone', false, '+48 502 502 502') ?>
-                    <a href="phone:<?= $phone ?>"> <?= $phone ?></a>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <strong><?= Yii::t('db', 'EMAIL'); ?></strong>
-                <? $email = MgHelpers::getSetting('contact_email', false, '+48 502 502 502') ?>
-                <div class="Contact__desc">
-                    <a href="mailto:<?= $email ?>"><?= $email ?></a>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6 Contact__map-wrapper">
-                <div id="map" class="Contact__map fadeIn animated"></div>
-            </div>
-            <div class="col-lg-6" style="padding-left: 0">
-                <div class="Contact-form">
-                    <h6><?= Yii::t('db', 'WRITE TO US'); ?></h6>
-                    <?php
-                    $form = ActiveForm::begin([
-                        'id' => 'contact-form',
-                        'fieldConfig' => \app\components\ProjectHelper::getFormFieldConfig(false)
-                    ]);
+        //                    echo $form->errorSummary($model);
+        ?>
+        <h4><?= Yii::t('db', 'Contact form') ?></h4>
 
-                    //                    echo $form->errorSummary($model);
-                    ?>
-                    <div class="Contact-form__form-group form-group">
-                        <?= $form->field($model, 'name')->textInput(['placeholder' => $model->getAttributeLabel('name')]) ?>
-                    </div>
-                    <div class="Contact-form__form-group form-group">
-                        <?= $form->field($model, 'email')->textInput(['placeholder' => $model->getAttributeLabel('email')]) ?>
-                    </div>
+        <?= $form->field($model, 'name')->textInput(['placeholder' => $model->getAttributeLabel('name')]) ?>
 
-                    <div class="Contact-form__form-group form-group">
-                        <?= $form->field($model, 'phone')->textInput(['placeholder' => $model->getAttributeLabel('phone')]) ?>
-                    </div>
+        <?= $form->field($model, 'email')->textInput(['placeholder' => $model->getAttributeLabel('email')]) ?>
 
 
-                    <div class="Contact-form__form-group form-group">
-                        <?= $form->field($model, 'body')->textarea(['placeholder' => ' ','rows'=>4]) ?>
-                    </div>
+        <?= $form->field($model, 'body')->textarea(['placeholder' => $model->getAttributeLabel('body'), 'rows' => 4]) ?>
 
 
-                    <div class="Form__group form-group checkbox-container">
-                        <?= $form->field($model, 'acceptTerms',
-                            [
-                                'options' => [
-                                    'class' => "Form__group form-group",
-                                ],
-                                'checkboxTemplate' => "{input}\n{label}\n{error}",
-                            ]
-                        )->checkbox(['class' => 'Form__checkbox']) ?>
-
-                        <?= $form->field($model, 'acceptTerms2',
-                            [
-                                'options' => [
-                                    'class' => "Form__group form-group",
-                                ],
-                                'checkboxTemplate' => "{input}\n{label}\n{error}",
-                            ]
-                        )->checkbox(['class' => 'Form__checkbox']) ?>
-                        <?= $form->field($model, 'acceptTerms3',
-                            [
-                                'options' => [
-                                    'class' => "Form__group form-group",
-                                ],
-                                'checkboxTemplate' => "{input}\n{label}\n{error}",
-                            ]
-                        )->checkbox(['class' => 'Form__checkbox']) ?>
-                        <?= $form->field($model, 'acceptTerms4',
-                            [
-                                'options' => [
-                                    'class' => "Form__group form-group",
-                                ],
-                                'checkboxTemplate' => "{input}\n{label}\n{error}",
-                            ]
-                        )->checkbox(['class' => 'Form__checkbox']) ?>
-                    </div>
-
-                    <?= $form->field($model, 'reCaptcha')->widget(
-                        \himiklab\yii2\recaptcha\ReCaptcha::className(),
-                        ['siteKey' => MgHelpers::getConfigParam('recaptcha')['siteKey']]
-                    ) ?>
-
-
-                    <div class="text-right">
-                        <button
-                                type="submit"
-                                class="Contact-form__submit btn btn-success btn-block"
-                        >
-                            <?= Yii::t('db', 'Send message'); ?>
-                        </button>
-                    </div>
-                    <?php ActiveForm::end(); ?>
-                </div>
-            </div>
-        </div>
+        <input class="button" type="submit" value="<?= Yii::t('db', 'Send') ?>"/>
+        <?php ActiveForm::end(); ?>
     </div>
+    <?= $this->render('contact/script') ?>
 </section>
 
 
-<?= $this->render('contact/script') ?>
 
-<?= $this->render('/common/team')?>
+

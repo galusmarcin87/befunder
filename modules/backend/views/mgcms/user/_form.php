@@ -71,10 +71,10 @@ use yii\helpers\Url;
             <?= $form->field($model, 'twitter')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('twitter')]) ?>
         </div>
         <div class="col-md-4">
-            <?= $form->field($model, 'linkedin')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('linkedin')]) ?>
+            <?= $form->field($model, 'googleplus')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('googleplus')]) ?>
         </div>
         <div class="col-md-4">
-            <?= $form->field($model, 'instagram')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('instagram')]) ?>
+            <?= $form->field($model, 'tumblr')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('tumblr')]) ?>
         </div>
         <div class="col-md-4">
             <?= $form->field($model, 'position')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('position')]) ?>

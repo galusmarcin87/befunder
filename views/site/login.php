@@ -33,8 +33,8 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfig(true);
                 ?>
 
                 <?= $this->render('login/_buttons')?>
-                <?= $form->field($model, 'username')->textInput(['type' => 'text', 'required' => true, 'placeholder' => $model->getAttributeLabel('username')]) ?>
-                <?= $form->field($model, 'password')->textInput(['type' => 'password', 'required' => true, 'placeholder' => $model->getAttributeLabel('username')]) ?>
+                <?= $form->field($model, 'username')->textInput(['type' => 'text', 'required' => true]) ?>
+                <?= $form->field($model, 'password')->textInput(['type' => 'password', 'required' => true]) ?>
 
                 <div class="row">
                     <div class="col-md-6">

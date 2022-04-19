@@ -78,7 +78,7 @@ use app\components\mgcms\MgHelpers;
 class User extends BaseUser implements IdentityInterface
 {
 
-    public $modelAttributes = ['facebook', 'twitter', 'linkedin', 'instagram', 'position'];
+    public $modelAttributes = ['facebook', 'twitter', 'linkedin', 'instagram', 'position', 'googleplus', 'tumblr'];
 
 
     const ROLE_ADMIN = 'admin';
@@ -137,9 +137,9 @@ class User extends BaseUser implements IdentityInterface
 //        [['password'], StrengthValidator::className(), 'min' => 8, 'digit' => 1, 'special' => 1, 'upper' => 1, 'lower' => 1, 'userAttribute' => 'username'],
             [['city', 'first_name', 'last_name', 'citizenship', 'pesel', 'birthdate', 'birth_country', 'document_type', 'street', 'house_no', 'flat_no', 'postcode', 'email', 'phone'], 'required', 'on' => 'kyc'],
             ['acceptTerms', 'required', 'requiredValue' => 1, 'message' => Yii::t('db', 'This field is required'), 'on' => 'account'],
-            [['facebook', 'twitter', 'linkedin', 'instagram', 'phone', 'position', 'step', 'type', 'is_corespondence', 'house_no'], 'safe'],
+            [['facebook', 'twitter', 'linkedin', 'instagram', 'phone', 'position', 'step', 'type', 'is_corespondence', 'house_no', 'googleplus', 'tumblr'], 'safe'],
             [['first_name', 'last_name', 'linkedin', 'instagram', 'phone', 'position'], 'required', 'on' => 'person'],
-            [['company_name','company_nip','company_regon', 'company_country', 'company_voivodeship', 'company_street', 'company_flat_no', 'company_house_no', 'company_city', 'company_postcode', 'bank_no'], 'safe'],
+            [['company_name', 'company_nip', 'company_regon', 'company_country', 'company_voivodeship', 'company_street', 'company_flat_no', 'company_house_no', 'company_city', 'company_postcode', 'bank_no'], 'safe'],
             [['file_text'], 'string'],
         ];
     }

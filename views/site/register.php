@@ -28,22 +28,22 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfig(true);
                 ?>
 
                 <?= $this->render('login/_buttons') ?>
-                <?= $form->field($model, 'username')->textInput(['type' => 'text', 'required' => true, 'placeholder' => $model->getAttributeLabel('username')]) ?>
+                <?= $form->field($model, 'username')->textInput(['type' => 'text', 'required' => true]) ?>
 
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($model, 'firstName')->textInput(['type' => 'text', 'required' => true, 'placeholder' => $model->getAttributeLabel('firstName')]) ?>
+                        <?= $form->field($model, 'firstName')->textInput(['type' => 'text', 'required' => true]) ?>
                     </div>
                     <div class="col-md-6">
-                        <?= $form->field($model, 'surname')->textInput(['type' => 'text', 'required' => true, 'placeholder' => $model->getAttributeLabel('surname')]) ?>
+                        <?= $form->field($model, 'surname')->textInput(['type' => 'text', 'required' => true]) ?>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($model, 'password')->textInput(['type' => 'password', 'required' => true, 'placeholder' => $model->getAttributeLabel('password')]) ?>
+                        <?= $form->field($model, 'password')->textInput(['type' => 'password', 'required' => true]) ?>
                     </div>
                     <div class="col-md-6">
-                        <?= $form->field($model, 'passwordRepeat')->textInput(['type' => 'password', 'required' => true, 'placeholder' => $model->getAttributeLabel('passwordRepeat')]) ?>
+                        <?= $form->field($model, 'passwordRepeat')->textInput(['type' => 'password', 'required' => true]) ?>
                     </div>
                 </div>
                 <div class="row">
