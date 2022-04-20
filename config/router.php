@@ -91,5 +91,13 @@ return [
             ],
             'route' => '/site/real-estate-report',
         ],
+        [
+            'class' => 'geertw\Yii2\TranslatableUrlRule\TranslatableUrlRule',
+            'patterns' => [
+                'en' => '/for-investor',
+                'pl' => '/dla-inwestora',
+            ],
+            'route' => '/site/for-investor',
+        ],
     ],
 ];

@@ -292,6 +292,16 @@ class SiteController extends \app\components\mgcms\MgCmsController
         return $this->render('about');
     }
 
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionForInvestor()
+    {
+        return $this->render('forInvestor');
+    }
+
     public function actionKnowledgeBase()
     {
         return $this->render('knowledgeBase');
