@@ -31,16 +31,5 @@ $this->title = Yii::t('db', 'About us');
     </div>
 </section>
 
-<section class="files-wrapper">
-    <div class="container text-center">
-        <h2><?= Yii::t('db', 'Files to download') ?></h2>
-        <?= MgHelpers::getSetting('about us files to download text header ' . Yii::$app->language, true, 'about us files to download text header'); ?>
-        <div class="text-center files">
-            <?= MgHelpers::getSetting('about us files to download text ' . Yii::$app->language, true, 'about us files to download text'); ?>
+<?= $this->render('/common/filesToDownload') ?>
 
-            <?= MgHelpers::getSetting('about us files to download ' . Yii::$app->language, true, 'about us files to download'); ?>
-
-
-        </div>
-    </div>
-</section>
