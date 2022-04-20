@@ -8,34 +8,15 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canoni
 $this->params['breadcrumbs'][] = $model->title;
 
 ?>
-<?= $this->render('/common/breadcrumps') ?>
 
-<section class="Section News News--single animatedParent">
-    <div class="container fadeIn animated">
-        <div>
-            <div class="Card">
-                <div class="Card__header__wrapper">
-                    <? if ($model->file && $model->file->isImage()): ?>
-                        <img class="Card__image" src="<?= $model->file->getImageSrc() ?>"/>
-                    <? endif ?>
-                    <div class="Card__header-block">
-                        <div class="Projects__card__date">
-                            <img
-                                    src="/svg/kalendarz.svg"
-                                    class="Projects__card__date__ico"
-                                    alt=""
-                            />
-                            <?= date('d.m.Y', strtotime($model->created_on)) ?>
-                        </div>
-                        <h1><?= $model->title ?></h1>
-                    </div>
-                </div>
-                <div class="Card__body">
-                    <?= $model->content ?>
-                </div>
-            </div>
-        </div>
+
+<section class="info about-us">
+    <div class="container">
+        <h2><?= $model->title ?></h2>
+
+        <?= $model->content ?>
+
     </div>
 </section>
 
-<?= $this->render('/common/news') ?>
+
