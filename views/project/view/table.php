@@ -46,5 +46,11 @@ use yii\web\View;
             </div>
             <div><?= $model->investition_time ?></div>
         </div>
+        <div class="project__description__item">
+            <div class="project__description__item__header">
+                <?= Yii::t('db', 'Date of profit realization') ?>:
+            </div>
+            <div><?= $model->date_realization_profit ?></div>
+        </div>
     </div>
 </div>
