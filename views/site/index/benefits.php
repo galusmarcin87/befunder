@@ -29,18 +29,18 @@ use app\components\mgcms\MgHelpers;
                 <div class="benefits__icon">
                     <i class="fa fa-cog" aria-hidden="true"></i>
                 </div>
-                <h6><?= MgHelpers::getSetting('HP - benefits - 2 header ' . Yii::$app->language,false, 'HP - benefits - 2 header')?></h6>
+                <h6><?= MgHelpers::getSetting('HP - benefits - 3 header ' . Yii::$app->language,false, 'HP - benefits - 3 header')?></h6>
                 <p>
-                    <?= MgHelpers::getSetting('HP - benefits - 2 text ' . Yii::$app->language, false, 'HP - benefits - 2 text')?>
+                    <?= MgHelpers::getSetting('HP - benefits - 3 text ' . Yii::$app->language, false, 'HP - benefits - 3 text')?>
                 </p>
             </div>
             <div class="col-md-3 col-sm-6 benefits__item">
                 <div class="benefits__icon">
                     <i class="fa fa-calendar-o" aria-hidden="true"></i>
                 </div>
-                <h6><?= MgHelpers::getSetting('HP - benefits - 2 header ' . Yii::$app->language,false, 'HP - benefits - 2 header')?></h6>
+                <h6><?= MgHelpers::getSetting('HP - benefits - 4 header ' . Yii::$app->language,false, 'HP - benefits - 4 header')?></h6>
                 <p>
-                    <?= MgHelpers::getSetting('HP - benefits - 2 text ' . Yii::$app->language, false, 'HP - benefits - 2 text')?>
+                    <?= MgHelpers::getSetting('HP - benefits - 4 text ' . Yii::$app->language, false, 'HP - benefits - 4 text')?>
                 </p>
             </div>
         </div>

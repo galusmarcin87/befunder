@@ -33,17 +33,21 @@ $index = 0;
             </div>
             <div class="project__info__content">
                 <div class="row">
-                    <div class="col-md-8">
-                        <?= $model->text ?>
+					<div class="col-md-8">
+                        <?= $model->lead ?>
                     </div>
-                    <div class="col-md-4">
+					<div class="col-md-4">
                         <div class="project__counter">
                             <?= $this->render('_counterHeader', ['model' => $model]) ?>
                             <?= $this->render('_counterWrapper', ['model' => $model]) ?>
                             <?= $this->render('_counterBody', ['model' => $model]) ?>
-                            <a href="" class="button button--block">ZAINESTUJ</a>
+                            <a href="" class="button button--block">ZAINWESTUJ</a>
                         </div>
                     </div>
+					<div class="col-md-12">
+                        <?= $model->text ?>
+                    </div>
+
                 </div>
                 <div class="row">
                     <div class="col-md-8">

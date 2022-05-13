@@ -36,33 +36,6 @@ $menu2 = new NobleMenu(['name' => 'footer2_' . Yii::$app->language, 'loginLink' 
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <h4><?= MgHelpers::getSetting('footer - left header ' . Yii::$app->language, false, 'footer - left header') ?></h4>
-                    <p class="footer__description">
-                        <?= MgHelpers::getSetting('footer - left text ' . Yii::$app->language, false, 'footer - left text') ?>
-                    </p>
-                </div>
-                <div class="col-md-6">
-                    <h4><?= Yii::t('db', 'Contact') ?></h4>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h5><?= Yii::t('db', 'Address') ?></h5>
-                            <p>
-                                <?= MgHelpers::getSetting('footer - contact', false, 'footer - contact') ?>
-                            </p>
-                        </div>
-                        <div class="col-sm-6">
-                            <?
-                            $phone = MgHelpers::getSetting('footer - phone', false, 'footer - phone');
-                            $email = MgHelpers::getSetting('footer - email', false, 'footer - email');
-                            ?>
-                            <h5><?= Yii::t('db', 'Phone') ?></h5>
-                            <a href="tel:<?= $phone ?>"><?= $phone ?></a>
-                            <h5><?= Yii::t('db', 'Email') ?></h5>
-                            <a href="mailto:<?= $email ?>"><?= $email ?></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="newsletter">
                 <h4><?= Yii::t('db', 'newsletter') ?></h4>
                 <?php $form = ActiveForm::begin(['id' => 'newsletter-form', 'class' => 'fadeIn animated']); ?>
@@ -75,7 +48,28 @@ $menu2 = new NobleMenu(['name' => 'footer2_' . Yii::$app->language, 'loginLink' 
                 />
                     <button class="button" type="submit"><?= Yii::t('db', 'Subscribe') ?></button>
                 <?php ActiveForm::end(); ?>
+            </div><br>
+				<p class="footer__description">
+                <?= MgHelpers::getSetting('footer - left text ' . Yii::$app->language, false, 'footer - left text') ?>
+                </p>
+                </div>
+                <div class="col-md-6">
+                    <h4><?= Yii::t('db', 'Contact') ?></h4>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p>
+                                <?= MgHelpers::getSetting('footer - contact', false, 'footer - contact') ?>
+                            </p>
+                        </div>
+                        <div class="col-sm-6">
+							<p>
+                            <?= MgHelpers::getSetting('footer - email', false, 'footer - email') ?>
+							</p>
+                        </div>
+                    </div>
+                </div>
             </div>
+
             <div class="footer__menu">
                 <div class="row">
                     <div class="col">
