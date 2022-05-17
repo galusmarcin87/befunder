@@ -33,3 +33,8 @@
 .mainTable a {
   color: black;
 }
+@media (min-width: 650px) {
+  .menu {
+    justify-content: space-between;
+  }
+}
