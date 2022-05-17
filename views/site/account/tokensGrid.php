@@ -15,43 +15,44 @@ $searchParams = ['PaymentSearch' => ['user_id' => $user->id]];
 $dataProvider = $searchModel->search($searchParams);
 
 
-?>
-<style>
-    .red {
-        color: #dc0211;
-    }
 
-    .green {
-        color: #069844;
-    }
-</style>
+?>
+
+
+<div class="desc">
+    <?= count($user->paymentsApproved) ?> <?= Yii::t('db', count($user->paymentsApproved) === 1 ? 'investition' : 'investitions') ?>
+    <span class="pull-right">
+              <?= Yii::t('db', 'Total amount of funds invested ') ?>: <?= number_format(array_sum(array_column($user->paymentsApproved, 'amount')), 2, '.', ' '); ?> PLN
+            </span>
+</div>
 
 <div class="payment-grid">
     <?php
     $gridColumn = [
         ['class' => 'yii\grid\SerialColumn'],
         'project.name',
-        'project.link:raw',
+       // 'project.link:raw',
         [
             'attribute' => 'amount',
             'label' => Yii::t('db', 'My investition'),
             'format' => 'numberSeparatedWithSpace'
         ],
-        'statusToDisplay:raw',
+        'percentage',
+       //'statusToDisplay:raw',
         [
             'attribute' => 'created_on',
             'label' => Yii::t('db', 'Payment date')
         ],
         'project.investition_time',
-        'project.daysLeft',
-        'benefitWithAmount:numberSeparatedWithSpace',
-        [
-            'label' => Yii::t('db', 'Increse investition'),
-            'value' => function ($model, $key, $index, $column) {
-                return Html::a(Yii::t('db', 'invest'), ['project/buy', 'id' => $model->project->id]);
-            },
-            'format' => 'raw'
-        ],
+        //'project.daysLeft',
+        //'benefitWithAmount:numberSeparatedWithSpace',
+//        [
+//            'label' => Yii::t('db', 'Increse investition'),
+//            'value' => function ($model, $key, $index, $column) {
+//                return Html::a(Yii::t('db', 'invest'), ['project/buy', 'id' => $model->project->id]);
+//            },
+//            'format' => 'raw'
+//        ],
         [
             'class' => 'kartik\grid\ExpandRowColumn',
             'value' => function ($model, $key, $index, $column) {
@@ -78,7 +79,8 @@ $dataProvider = $searchModel->search($searchParams);
         'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-payment']],
         'summary' => false,
         'bordered' => false,
-        'options' => ['class' => 'mainTable']
+        'options' => ['class' => 'mainTable'],
+        'striped' => false,
         // your toolbar can include the additional full export menu
     ]);
 
@@ -86,8 +88,3 @@ $dataProvider = $searchModel->search($searchParams);
 
 </div>
 
-<script>
-  $('.mainTable > div.table-responsive > table > tbody > tr').each(function (index) {
-    $(this).addClass(index % 2 ? 'even' : 'odd');
-  });
-</script>

@@ -31,7 +31,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfig(false);
             <div class="row">
                 <div class="col-md-8"><?= $form->field($model, 'email')->textInput() ?></div>
                 <div class="col-md-4">
-                    <button class="btn inputFit"
+                    <button class="button inputFit"
                             onclick="return confirm('<?= Yii::t('db', 'Are you sure to make changes?') ?>')">
                         <?= Yii::t('db', 'Change') ?>
                     </button>
@@ -55,7 +55,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfig(false);
             <?= $form->field($model, 'password')->passwordInput(['placeholder' => Yii::t('db', 'New password')]) ?>
             <?= $form->field($model, 'passwordRepeat')->passwordInput(['placeholder' => Yii::t('db', 'Password repeat')]) ?>
 
-            <button type="submit" class="btn btn-success btn-block" name="passwordChanging"
+            <button type="submit" class="button" name="passwordChanging"
                     onclick="return confirm('<?= Yii::t('db', 'Are you sure to make changes?') ?>')">
                 <?= Yii::t('db', 'Save changes') ?>
             </button>
@@ -64,7 +64,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfig(false);
         </div>
 
 
-        <div class="col-md-2 offset-2">
+        <div class="col-md-2 offset-2 d-none">
             <?php
             $form = ActiveForm::begin([
                 'id' => 'login-form',
