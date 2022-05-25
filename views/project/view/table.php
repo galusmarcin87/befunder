@@ -38,7 +38,7 @@ use yii\web\View;
             <div class="project__description__item__header">
                 <?= Yii::t('db', 'Crowdsale profit') ?>:
             </div>
-            <div><?= $model->percentage ?>%</div>
+            <div><?= $model->percentage * (int)$model->investition_time ?>%</div>
         </div>
         <div class="project__description__item">
             <div class="project__description__item__header">
@@ -51,6 +51,12 @@ use yii\web\View;
                 <?= Yii::t('db', 'Date of profit realization') ?>:
             </div>
             <div><?= $model->date_realization_profit ?></div>
+        </div>
+        <div class="project__description__item">
+            <div class="project__description__item__header">
+                <?= Yii::t('db', 'Yearly profit') ?>:
+            </div>
+            <div><?= $model->percentage ?>%</div>
         </div>
     </div>
 </div>
