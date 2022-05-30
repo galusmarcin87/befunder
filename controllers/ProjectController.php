@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+//use \app\components\ZondaPayAPI;
 use app\models\mgcms\db\User;
 use app\models\SubscribeForm;
 use Yii;
@@ -302,8 +303,18 @@ class ProjectController extends \app\components\mgcms\MgCmsController
     {
 
 
-        $pubkey = 'f57da90b-20fd-4beb-b9eb-51aa2fa515e1';
-        $privkey = '13a8b970-6ac5-4ffc-a714-54f2aaed8b64';
+        $pubkey = 'ddcb401f-0ae6-46c7-9b62-81f9d6a01889';
+        $privkey = 'a8d4075a-3903-4444-beb9-28833aa9be1e';
+
+        $zondaApi = new \app\components\ZondaPayAPI($pubkey, $privkey);
+
+        $response = $zondaApi->callApi('/stores/details');
+
+
+        echo '<pre>';
+        echo var_dump($response);
+        echo '</pre>';
+        exit;
 
 
         $client = new \GuzzleHttp\Client();
@@ -318,7 +329,7 @@ class ProjectController extends \app\components\mgcms\MgCmsController
 
         $body = [];
 
-        $body    = json_encode($body);
+        $body    = '';
         $time    = time();
         $sign    = hash_hmac("sha512", $pubkey . $time . $body, $privkey);
         $headers = array(
