@@ -87,9 +87,9 @@ CREATE TABLE IF NOT EXISTS `auth` (
   `role` varchar(255) NOT NULL DEFAULT '0',
   `value` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=302 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=306 DEFAULT CHARSET=utf8;
 
--- Zrzucanie danych dla tabeli befunder.auth: ~301 rows (około)
+-- Zrzucanie danych dla tabeli befunder.auth: ~305 rows (około)
 /*!40000 ALTER TABLE `auth` DISABLE KEYS */;
 INSERT INTO `auth` (`id`, `controller`, `action`, `role`, `value`) VALUES
 	(1, 'article', 'clone', 'admin', 1),
@@ -392,7 +392,11 @@ INSERT INTO `auth` (`id`, `controller`, `action`, `role`, `value`) VALUES
 	(298, 'slider', 'index', 'admin', 0),
 	(299, 'mgcms/slider', 'save-as-new', 'admin', 0),
 	(300, 'mgcms/slider', 'update', 'admin', 0),
-	(301, 'mgcms/slider', 'delete', 'admin', 0);
+	(301, 'mgcms/slider', 'delete', 'admin', 0),
+	(302, 'slider', 'save-as-new', 'admin', 0),
+	(303, 'slider', 'view', 'admin', 0),
+	(304, 'slider', 'update', 'admin', 0),
+	(305, 'slider', 'delete', 'admin', 0);
 /*!40000 ALTER TABLE `auth` ENABLE KEYS */;
 
 -- Zrzut struktury tabela befunder.bonus
@@ -584,7 +588,7 @@ CREATE TABLE IF NOT EXISTS `i18n_message` (
   CONSTRAINT `fk_message_source_message` FOREIGN KEY (`id`) REFERENCES `i18n_source_message` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Zrzucanie danych dla tabeli befunder.i18n_message: ~2 231 rows (około)
+-- Zrzucanie danych dla tabeli befunder.i18n_message: ~1 678 rows (około)
 /*!40000 ALTER TABLE `i18n_message` DISABLE KEYS */;
 INSERT INTO `i18n_message` (`id`, `language`, `translation`) VALUES
 	(1, 'ar', NULL),
@@ -2688,7 +2692,59 @@ INSERT INTO `i18n_message` (`id`, `language`, `translation`) VALUES
 	(429, 'de', NULL),
 	(429, 'en', NULL),
 	(429, 'fr', NULL),
-	(429, 'pl', NULL);
+	(429, 'pl', NULL),
+	(430, 'de', NULL),
+	(430, 'en', NULL),
+	(430, 'fr', NULL),
+	(430, 'pl', NULL),
+	(431, 'de', NULL),
+	(431, 'en', NULL),
+	(431, 'fr', NULL),
+	(431, 'pl', NULL),
+	(432, 'de', NULL),
+	(432, 'en', NULL),
+	(432, 'fr', NULL),
+	(432, 'pl', NULL),
+	(433, 'de', NULL),
+	(433, 'en', NULL),
+	(433, 'fr', NULL),
+	(433, 'pl', NULL),
+	(434, 'de', NULL),
+	(434, 'en', NULL),
+	(434, 'fr', NULL),
+	(434, 'pl', NULL),
+	(435, 'de', NULL),
+	(435, 'en', NULL),
+	(435, 'fr', NULL),
+	(435, 'pl', NULL),
+	(436, 'de', NULL),
+	(436, 'en', NULL),
+	(436, 'fr', NULL),
+	(436, 'pl', NULL),
+	(437, 'de', NULL),
+	(437, 'en', NULL),
+	(437, 'fr', NULL),
+	(437, 'pl', NULL),
+	(438, 'de', NULL),
+	(438, 'en', NULL),
+	(438, 'fr', NULL),
+	(438, 'pl', NULL),
+	(439, 'de', NULL),
+	(439, 'en', NULL),
+	(439, 'fr', NULL),
+	(439, 'pl', NULL),
+	(440, 'de', NULL),
+	(440, 'en', NULL),
+	(440, 'fr', NULL),
+	(440, 'pl', NULL),
+	(441, 'de', NULL),
+	(441, 'en', NULL),
+	(441, 'fr', NULL),
+	(441, 'pl', NULL),
+	(442, 'de', NULL),
+	(442, 'en', NULL),
+	(442, 'fr', NULL),
+	(442, 'pl', NULL);
 /*!40000 ALTER TABLE `i18n_message` ENABLE KEYS */;
 
 -- Zrzut struktury tabela befunder.i18n_source_message
@@ -2698,9 +2754,9 @@ CREATE TABLE IF NOT EXISTS `i18n_source_message` (
   `message` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`),
   KEY `idx_source_message_category` (`category`)
-) ENGINE=InnoDB AUTO_INCREMENT=430 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=443 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Zrzucanie danych dla tabeli befunder.i18n_source_message: ~521 rows (około)
+-- Zrzucanie danych dla tabeli befunder.i18n_source_message: ~547 rows (około)
 /*!40000 ALTER TABLE `i18n_source_message` DISABLE KEYS */;
 INSERT INTO `i18n_source_message` (`id`, `category`, `message`) VALUES
 	(1, 'db', 'This field is required'),
@@ -3131,7 +3187,20 @@ INSERT INTO `i18n_source_message` (`id`, `category`, `message`) VALUES
 	(426, 'db', 'DETAILS'),
 	(427, 'db', 'Time left to the end of collection'),
 	(428, 'db', 'newsletter'),
-	(429, 'db', 'MENU');
+	(429, 'db', 'MENU'),
+	(430, 'db', 'previous'),
+	(431, 'db', 'next'),
+	(432, 'db', 'Check required terms'),
+	(433, 'db', 'Contact form'),
+	(434, 'db', 'Our team'),
+	(435, 'db', 'For investor'),
+	(436, 'db', 'Yearly profit'),
+	(437, 'db', 'Date of profit realization'),
+	(438, 'db', 'investor account'),
+	(439, 'db', 'Investor account'),
+	(440, 'db', 'investitions'),
+	(441, 'db', 'Total amount of funds invested '),
+	(442, 'db', 'investition');
 /*!40000 ALTER TABLE `i18n_source_message` ENABLE KEYS */;
 
 -- Zrzut struktury tabela befunder.menu
@@ -3259,7 +3328,7 @@ CREATE TABLE IF NOT EXISTS `model_attribute` (
   PRIMARY KEY (`rel_id`,`model`,`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Zrzucanie danych dla tabeli befunder.model_attribute: ~14 rows (około)
+-- Zrzucanie danych dla tabeli befunder.model_attribute: ~16 rows (około)
 /*!40000 ALTER TABLE `model_attribute` DISABLE KEYS */;
 INSERT INTO `model_attribute` (`rel_id`, `model`, `key`, `value`) VALUES
 	(1, 'app\\models\\mgcms\\db\\Project', 'lead_en', '<p>sdfds</p>'),
@@ -3272,9 +3341,11 @@ INSERT INTO `model_attribute` (`rel_id`, `model`, `key`, `value`) VALUES
 	(1, 'app\\models\\mgcms\\db\\User', 'twitter', ''),
 	(2, 'app\\models\\mgcms\\db\\Project', 'emails', 'sdfsd@wp.pl;dsfsddsdf@wp.pl;sdfsdf@wp.pl;sdfsdf@wp.pl;sdfsdf@wp.pl;sdfsdf@wp.pl;dfsdf@wp.pl;daaaaaaaaaaaaaafsdf@wp.pl;fdsfsd@wp.pl;'),
 	(11, 'app\\models\\mgcms\\db\\User', 'facebook', 'sdf'),
+	(11, 'app\\models\\mgcms\\db\\User', 'googleplus', 'asdasd'),
 	(11, 'app\\models\\mgcms\\db\\User', 'instagram', 'fgdh'),
 	(11, 'app\\models\\mgcms\\db\\User', 'linkedin', 'gdfg'),
 	(11, 'app\\models\\mgcms\\db\\User', 'position', 'stan'),
+	(11, 'app\\models\\mgcms\\db\\User', 'tumblr', 'asdfasdf'),
 	(11, 'app\\models\\mgcms\\db\\User', 'twitter', 'fd');
 /*!40000 ALTER TABLE `model_attribute` ENABLE KEYS */;
 
@@ -3299,7 +3370,7 @@ CREATE TABLE IF NOT EXISTS `payment` (
 -- Zrzucanie danych dla tabeli befunder.payment: ~1 rows (około)
 /*!40000 ALTER TABLE `payment` DISABLE KEYS */;
 INSERT INTO `payment` (`id`, `created_on`, `project_id`, `user_id`, `amount`, `status`, `percentage`, `is_preico`, `user_token`) VALUES
-	(59, NULL, 2, 1, 22222.000000, '2', NULL, NULL, NULL);
+	(59, '2022-05-17 21:55:57', 2, 1, 22222.000000, '2', 4.00, NULL, NULL);
 /*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 
 -- Zrzut struktury tabela befunder.project
@@ -3348,9 +3419,9 @@ CREATE TABLE IF NOT EXISTS `project` (
   CONSTRAINT `fk_project_file1` FOREIGN KEY (`file_id`) REFERENCES `file` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_project` FOREIGN KEY (`created_by`) REFERENCES `user` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION,
   CONSTRAINT `project_flag_fx` FOREIGN KEY (`flag_id`) REFERENCES `file` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
--- Zrzucanie danych dla tabeli befunder.project: ~15 rows (około)
+-- Zrzucanie danych dla tabeli befunder.project: ~18 rows (około)
 /*!40000 ALTER TABLE `project` DISABLE KEYS */;
 INSERT INTO `project` (`id`, `name`, `status`, `localization`, `gps_lat`, `gps_long`, `lead`, `text`, `file_id`, `whitepaper`, `www`, `money`, `money_full`, `investition_time`, `percentage`, `date_presale_start`, `date_presale_end`, `date_crowdsale_start`, `date_crowdsale_end`, `percentage_presale_bonus`, `date_realization_profit`, `token_value`, `token_blockchain`, `token_to_sale`, `token_minimal_buy`, `token_left`, `flag_id`, `buy_token_info`, `token_currency`, `text2`, `created_by`, `fiber_collect_id`, `iban`, `pay_description`, `pay_name`, `value`) VALUES
 	(1, 'Budowa apartamentowca', '1', 'Warszawa adasd', 50.07046120, 19.97218980, '<p>Aenean convallis eros ut tellus feugiat porta. Fusce convallis ante nec libero iaculis rutrum. Sed pellentesque est id urna iaculis, at rhoncus ex viverra. Donec turpis lorem, fermentum non auctor vel, porttitor vel metus. Nunc non euismod metus. Duis posuere tortor ultricies, tempus leo non, varius eros.</p>', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>\r\n<p class="light">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>\r\n<p class="light">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>', 17, 'sdfsd', 'erfg', 1500000, 3450000, '4lata', 34.5, '2019-07-17', '2019-08-02', '2019-08-01', '2022-06-22', 45.5, '2019-07-26', 23, 'sdfs', 234, 34, 33, NULL, '<p>dfgfg g dfgf</p>\r\n<p>&nbsp;</p>', '', '<section class="Section Analize animatedParent">\r\n<div class="container fadeIn animated go">\r\n<h3 class="Header-icon">Tokeny i ich podział<img class="Header-icon__icon" src="http://local.nol/svg/znaczek.svg" alt="" /></h3>\r\n<h6 class="O-projekcie__desc O-projekcie__desc--black">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</h6>\r\n<div class="row">\r\n<div class="col-lg-6">\r\n<p class="O-projekcie__text text-left">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.</p>\r\n</div>\r\n<div class="col-lg-6">\r\n<p class="O-projekcie__text text-left">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.</p>\r\n</div>\r\n</div>\r\n<div class="row">\r\n<div class="col-md-6"><img class="O-projekcie__img" src="http://local.nol/img/img_3.png" alt="" /></div>\r\n<div class="col-md-6"><img class="O-projekcie__img" src="http://local.nol/img/img_4.png" alt="" /></div>\r\n</div>\r\n<h3 class="Header-icon">Regulaminy<img class="Header-icon__icon" src="http://local.nol/svg/znaczek.svg" alt="" /></h3>\r\n<div class="Doc">\r\n<div>Regulamin inwestora</div>\r\n<a class="btn btn-gray" href="http://local.nol/project/tokenomia">Pobierz plik</a></div>\r\n<div class="Doc">\r\n<div>Regulamin portalu</div>\r\n<a class="btn btn-gray" href="http://local.nol/project/tokenomia">Pobierz plik</a></div>\r\n</div>\r\n</section>\r\n<div class="Scroll-up">&nbsp;</div>', NULL, '', 'er', 'dfg', 'ter', NULL),
@@ -3367,7 +3438,10 @@ INSERT INTO `project` (`id`, `name`, `status`, `localization`, `gps_lat`, `gps_l
 	(12, 'fgdfgd', '1', '', NULL, NULL, '', '', 18, '', '', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', '', '', 1, '', NULL, NULL, NULL, NULL),
 	(13, 'aaaaaaa', '1', '', NULL, NULL, '', '', 19, '', '', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', '', '', 1, '', NULL, NULL, NULL, NULL),
 	(14, 'aaaaaaa', '1', '', NULL, NULL, '', '', 19, '', '', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', '', '', 1, NULL, NULL, NULL, NULL, NULL),
-	(15, 'sdsssssss', '1', '', NULL, NULL, '', '', 18, '', '', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', '', '', 1, '', NULL, NULL, NULL, NULL);
+	(15, 'sdsssssss', '1', '', NULL, NULL, '', '', 18, '', '', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', '', '', 1, '', NULL, NULL, NULL, NULL),
+	(16, 'asdasd', '1', '', NULL, NULL, '', '', 16, '', '', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '', '', 1, '', '', '', '', NULL),
+	(17, 'asdasd', '1', '', NULL, NULL, '', '', 16, '', '', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '', '', 1, '', '', '', '', NULL),
+	(18, 'asdasd', '1', '', NULL, NULL, '', '', 16, '', '', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '', '', 1, '', '', '', '', NULL);
 /*!40000 ALTER TABLE `project` ENABLE KEYS */;
 
 -- Zrzut struktury tabela befunder.setting
@@ -3378,9 +3452,9 @@ CREATE TABLE IF NOT EXISTS `setting` (
   `value_text` text,
   `type` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=323 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=344 DEFAULT CHARSET=utf8;
 
--- Zrzucanie danych dla tabeli befunder.setting: ~372 rows (około)
+-- Zrzucanie danych dla tabeli befunder.setting: ~333 rows (około)
 /*!40000 ALTER TABLE `setting` DISABLE KEYS */;
 INSERT INTO `setting` (`id`, `key`, `value`, `value_text`, `type`) VALUES
 	(1, 'SEO_title_home_page_pl', 'NOBLE ASSETS | PLATFORM', NULL, 'text'),
@@ -3698,7 +3772,28 @@ INSERT INTO `setting` (`id`, `key`, `value`, `value_text`, `type`) VALUES
 	(319, 'footer - left text pl', 'footer - left text', NULL, 'system'),
 	(320, 'footer - contact', 'footer - contact', NULL, 'system'),
 	(321, 'footer - phone', 'footer - phone', NULL, 'system'),
-	(322, 'footer - email', 'footer - email', NULL, 'system');
+	(322, 'footer - email', 'footer - email', NULL, 'system'),
+	(323, 'login right - header pl', 'login right - header', NULL, 'system'),
+	(324, 'login right - text pl', NULL, 'login right - text', 'system'),
+	(325, 'login right - video url pl', 'login right - video url', NULL, 'system'),
+	(326, 'about us text 1 pl', NULL, 'about us text 1', 'system'),
+	(327, 'about us image ', '/img/onas_1.jpg', NULL, 'system'),
+	(328, 'about us team text pl', NULL, 'about us team text', 'system'),
+	(329, 'about us text 2 pl', NULL, 'about us text 2', 'system'),
+	(330, 'about us files to download text header pl', NULL, 'about us files to download text header', 'system'),
+	(331, 'about us files to download text pl', NULL, 'about us files to download text', 'system'),
+	(332, 'about us files to download pl', '', '<p><a> <img src="http://local.befunder/img/file.png" alt="" /> Nazwa pliku </a> <a> <img src="http://local.befunder/img/file.png" alt="" /> Nazwa pliku</a><a> <img src="http://local.befunder/img/file.png" alt="" /> Nazwa pliku </a><a> <img src="http://local.befunder/img/file.png" alt="" /> Nazwa pliku </a><a> <img src="http://local.befunder/img/file.png" alt="" /> Nazwa pliku </a><a> <img src="http://local.befunder/img/file.png" alt="" /> Nazwa pliku </a></p>', 'system'),
+	(333, 'for investor text 1', NULL, 'for investor text 1', 'system'),
+	(334, 'for investor image', NULL, '/img/onas_1.jpg', 'system'),
+	(335, 'for investor text 2', NULL, 'for investor text 2', 'system'),
+	(336, 'for investor text 1pl', NULL, 'for investor text 1', 'system'),
+	(337, 'for investor text 2pl', NULL, 'for investor text 2', 'system'),
+	(338, 'for investor banner headerpl', 'Tradycyjny biznes w połączeniu z najnowszą technologią', NULL, 'system'),
+	(339, 'for investor banner textpl', 'Dołącz do społeczności Be-funder.com', NULL, 'system'),
+	(340, 'HP - benefits - 3 header pl', 'HP - benefits - 3 header', NULL, 'system'),
+	(341, 'HP - benefits - 3 text pl', 'HP - benefits - 3 text', NULL, 'system'),
+	(342, 'HP - benefits - 4 header pl', 'HP - benefits - 4 header', NULL, 'system'),
+	(343, 'HP - benefits - 4 text pl', 'HP - benefits - 4 text', NULL, 'system');
 /*!40000 ALTER TABLE `setting` ENABLE KEYS */;
 
 -- Zrzut struktury tabela befunder.slide
@@ -3717,13 +3812,16 @@ CREATE TABLE IF NOT EXISTS `slide` (
   KEY `fk_slide_slider1_idx` (`slider_id`) USING BTREE,
   CONSTRAINT `fk_slide_file1` FOREIGN KEY (`file_id`) REFERENCES `file` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION,
   CONSTRAINT `fk_slide_slider1` FOREIGN KEY (`slider_id`) REFERENCES `slider` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- Zrzucanie danych dla tabeli befunder.slide: ~2 rows (około)
+-- Zrzucanie danych dla tabeli befunder.slide: ~5 rows (około)
 /*!40000 ALTER TABLE `slide` DISABLE KEYS */;
 INSERT INTO `slide` (`id`, `name`, `header`, `subheader`, `body`, `file_id`, `slider_id`, `order`, `link`) VALUES
 	(1, 'ZDOBĄDŹ FINANSOWANIE', 'Tradycyjny biznes w połączeniu z najnowszą tehnologią', 'Dołącz do społeczności Be-funder.com', '', 40, 1, NULL, NULL),
-	(2, 'ZDOBĄDŹ FINANSOWANIE', 'Tradycyjny biznes w połączeniu z najnowszą tehnologią', 'Dołącz do społeczności Be-funder.com', '', NULL, 1, NULL, NULL);
+	(2, 'ZDOBĄDŹ FINANSOWANIE', 'Tradycyjny biznes w połączeniu z najnowszą tehnologią', 'Dołącz do społeczności Be-funder.com', '', NULL, 1, NULL, NULL),
+	(3, 'sdfsd', '', '', '', 23, 3, NULL, NULL),
+	(4, 'dfgdfg', '', '', '', 34, 3, NULL, NULL),
+	(5, 'fsdfsdf', '', '', '', NULL, 3, NULL, NULL);
 /*!40000 ALTER TABLE `slide` ENABLE KEYS */;
 
 -- Zrzut struktury tabela befunder.slider
@@ -3732,12 +3830,13 @@ CREATE TABLE IF NOT EXISTS `slider` (
   `name` varchar(245) NOT NULL,
   `language` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- Zrzucanie danych dla tabeli befunder.slider: ~1 rows (około)
+-- Zrzucanie danych dla tabeli befunder.slider: ~2 rows (około)
 /*!40000 ALTER TABLE `slider` DISABLE KEYS */;
 INSERT INTO `slider` (`id`, `name`, `language`) VALUES
-	(1, 'main', 'pl');
+	(1, 'main', 'pl'),
+	(3, 'pliki do pobrania', 'pl');
 /*!40000 ALTER TABLE `slider` ENABLE KEYS */;
 
 -- Zrzut struktury tabela befunder.tag
@@ -3816,9 +3915,9 @@ CREATE TABLE IF NOT EXISTS `user` (
   KEY `user_file_fx` (`file_id`),
   CONSTRAINT `fk_user_user` FOREIGN KEY (`created_by`) REFERENCES `user` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION,
   CONSTRAINT `user_file_fx` FOREIGN KEY (`file_id`) REFERENCES `file` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
--- Zrzucanie danych dla tabeli befunder.user: ~17 rows (około)
+-- Zrzucanie danych dla tabeli befunder.user: ~18 rows (około)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `role`, `status`, `email`, `created_on`, `last_login`, `created_by`, `address`, `postcode`, `birthdate`, `city`, `auth_key`, `language`, `phone`, `file_id`, `country`, `voivodeship`, `street`, `flat_no`, `citizenship`, `id_document_type`, `id_document_no`, `pesel`, `type`, `company_name`, `company_nip`, `company_regon`, `company_country`, `company_voivodeship`, `company_postcode`, `company_city`, `company_street`, `company_house_no`, `company_flat_no`, `house_no`, `cor_first_name`, `cor_last_name`, `cor_country`, `cor_voivodeship`, `cor_postcode`, `cor_city`, `cor_street`, `cor_house_no`, `cor_flat_no`, `bank_no`, `step`, `is_corespondence`, `file_text`, `acceptTerms5`, `acceptTerms6`) VALUES
 	(1, 'marcin', '$2y$13$RkABJxzwWDHVNlQD0X2MpuN99jt9m3w3ItxGKYo/nDd6UZm66cjMi', 'MAr', 'Gal', 'admin', 2, 'galusmarcin87@gmail.com', NULL, '2021-10-20 21:53:47', NULL, '', '39-220', '1981-09-04', 'pil', '', NULL, '345', NULL, 'pol', 'pod', 'mach', '1', 'sadf', 'asdfasd', 'fsadfasd', 'fasdfasd', '1', 'asd', 'asd', 'asd', 'asd', 'asd', 'asd', 'asd', 'asd', 'asd', 'asd', '47a', '', '', '', '', '', '', '', '', '', '3tgdfg', '3', 0, 'PRZYKŁADOWY LINK;https://piesto.io/upload/3f/1d/3f1da3476fbfae8e511158f9e8a80240df5b259f.pdf\r\nDRUGI PRZYKŁADOWY LINK;https://piesto.io/upload/d4/60/d460ebaae8ec78c0e3921c3844255621b6204632.pdf', NULL, NULL),
@@ -3831,13 +3930,14 @@ INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `ro
 	(8, 'marcin2@wp.pl', '$2y$13$scso7xkdmDwZWAuSVKjkQuj1GnqsRJ4rD4VoomTN284PjaKCb6NJm', NULL, NULL, 'client', 0, NULL, '2020-11-25 18:58:40', NULL, NULL, NULL, NULL, NULL, NULL, 'dG5vSHVxn89iwl0Nx0IbW2GSMs46_C2EFLdGX7v1PlBpGCPnfsz_SeHs-Uk2', 'pl', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(9, 'marcin3@wp.pl', '$2y$13$UbCsGLFbqS6LoGhkPktbheL7JILwl1WM0H.TMBKNfkzd4NYmBoh26', NULL, NULL, 'client', 0, NULL, '2020-11-25 18:59:12', NULL, NULL, NULL, NULL, NULL, NULL, 'y9uQtBRAV0a3yAj9udsbmYEHS38FqJADSC2VXfaC8TPwiKXlPLX0SOVgLbh2', 'pl', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(10, 'marcin4@wp.pl', '$2y$13$pfg41Decid5tg5r8MH6KD.fhAaH9YlFHr5FHySFdvN8hBTyk0aVwy', NULL, NULL, 'client', 0, NULL, '2020-11-25 18:59:32', NULL, NULL, NULL, NULL, NULL, NULL, 'rMvxjxdu6fA2--A4O_K3FJKFnYV21ZRYAqij3NaK4r8XvzxtFe-KJIIaveZS', 'pl', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(11, 'm.nowak@piesto.io', '$2y$13$6Q9rvkGcuibIA21CD.VSVutDn1SgmBOJqfDl6k5TxusGKf.T0QeMa', 'Marcin', 'Nowak', 'team', 0, '', '2020-12-23 20:00:35', NULL, 1, NULL, NULL, NULL, '', 'QYl77oUmLr7sgszTtlBrVinmTucemMpf_aKi2tJrYOIoowJjTTFy3WZC4qUA', NULL, '663 326 517', 19, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(11, 'm.nowak@piesto.io', '$2y$13$6Q9rvkGcuibIA21CD.VSVutDn1SgmBOJqfDl6k5TxusGKf.T0QeMa', 'Marcin', 'Nowak', 'team', 0, '', '2020-12-23 20:00:35', NULL, 1, NULL, NULL, NULL, '', 'QYl77oUmLr7sgszTtlBrVinmTucemMpf_aKi2tJrYOIoowJjTTFy3WZC4qUA', NULL, '663 326 517', 19, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL),
 	(12, 'sdfsd@wp.pl', '$2y$13$H.MWh96QCZioBWYz/WgXv.SO.Kkc9zUCKYNOH.fOd3rUVyuZUg/na', 'sdf', 'sdfsd', 'client', 0, NULL, '2021-03-11 21:19:39', NULL, NULL, NULL, NULL, NULL, NULL, 'dGR_mkIqN08pqJStBr1N1WWEd7kytTy5vBjSSnGjXzqrFPslS3JO0RC1YbWo', 'pl', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(13, 'galusmarcin87@gmail.com', '$2y$13$8Gi4lFt8a3KvVbywTw0mb.LG80BH07N2OjnNJNEUz.j3IEX2UcP4K', 'sdf', 'sdfsd', 'client', 0, NULL, '2021-03-11 21:20:32', NULL, NULL, NULL, NULL, NULL, NULL, 'h7CMPuKs5ggDeaSH_T2imimUnTj6m0EIUk04v8-OSUgdokZu2PPUkXWxeitN', 'pl', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(14, 'projectowner', '$2y$13$bcYFd6al5yfgjEBU7I8F0uyr1fNc.5JB1EO6C4N0/CQNPTjnTLeK.', '', '', 'project owner', 1, '', '2021-07-09 21:02:13', '2021-07-09 21:17:27', 1, NULL, NULL, NULL, NULL, 'J-FgJfljW-CHwFH1KqUZqUf772bjo4Tip_IfdSHTTm0JM5MQvBkaNPnq8fPj', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(15, 'asdasda@wp.pl', '$2y$13$mn12JQWUeA4hU4RGLdXwQu7JyvgX.XVtL1SRrUkbkOfv7St1p.PpW', 'aaa', 'ddd', 'client', 1, NULL, '2021-10-11 21:31:04', NULL, NULL, NULL, NULL, NULL, NULL, 'RThlX5R_cL0iU83V1AqxsvfvW6OUflYn3AlTj6eqBgLaBp12FnojyIk3F9TV', 'pl', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(16, 'fsdfdsfdsfsd@wp.pl', '$2y$13$mIoTEgLDxdWDzPGRdwM9XuAZjC7BKOvq1Fr6Cd3JsI8XWeD7Khb7.', 'sdfsdf', 'sdfsdfsd', 'client', 1, NULL, '2021-10-11 21:32:42', NULL, NULL, NULL, NULL, NULL, NULL, '9Cwt6VrfpvpwQ4SbYPmEJoV8dS8BlcDkFMTFfsVLPZcEzLHCbC-Hp1ixb_jJ', 'pl', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0),
-	(17, 'asdasdasd56@wp.pl', '$2y$13$odr1HFxjDfiI/BiK11qg5OEpKXpUloWzZ9f8VCxwW6DPUQ9/NG3/m', 'asdasdas', 'dasdasdas', 'client', 1, NULL, '2021-10-11 21:35:34', NULL, NULL, NULL, NULL, NULL, NULL, 'zbPTgqV67sAl9A6uYj953OLhERjUikrXVlYbSdbFBy5C9VTYXCKEhMzb7bt2', 'pl', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1);
+	(17, 'asdasdasd56@wp.pl', '$2y$13$odr1HFxjDfiI/BiK11qg5OEpKXpUloWzZ9f8VCxwW6DPUQ9/NG3/m', 'asdasdas', 'dasdasdas', 'client', 1, NULL, '2021-10-11 21:35:34', NULL, NULL, NULL, NULL, NULL, NULL, 'zbPTgqV67sAl9A6uYj953OLhERjUikrXVlYbSdbFBy5C9VTYXCKEhMzb7bt2', 'pl', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1),
+	(18, 'asdsdsa@wp.pl', '$2y$13$sZwir446qYdVyX1zwBnRWecl4lg9CoeB1yv8pgL/my7j0vmmIwObu', 'sdf34', 'dfg', 'client', 1, NULL, '2022-04-15 18:07:03', NULL, NULL, NULL, NULL, NULL, NULL, 'oaqWlfh2uRjn0COfFVXxAMxpKaeOaxV8sGvsXYutIywGiVBH1Zk9EG5BzjuA', 'pl', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
