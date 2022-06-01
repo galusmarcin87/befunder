@@ -61,19 +61,19 @@ class ZondaPayAPI
     }
 }
 
-$zonda = new ZondaPayAPI('PUBLIC_KEY_HERE', 'PRIVATE_KEY_HERE');
+//$zonda = new ZondaPayAPI('PUBLIC_KEY_HERE', 'PRIVATE_KEY_HERE');
 
 // POST Example
-$paymentStart = [
-    "destinationCurrency" => "EUR",
-    "price" => 200,
-    "orderId" => $zonda->getUUID(random_bytes(16))
-];
-$response = $zonda->callApi('/payments', $paymentStart, 'POST');
+//$paymentStart = [
+//    "destinationCurrency" => "EUR",
+//    "price" => 200,
+//    "orderId" => $zonda->getUUID(random_bytes(16))
+//];
+//$response = $zonda->callApi('/payments', $paymentStart, 'POST');
 
 // GET Example
 // $response = $zonda->callApi('/stores/details');
 
 
-echo $response;
+//echo $response;
 ?>

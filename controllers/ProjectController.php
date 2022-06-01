@@ -308,88 +308,25 @@ class ProjectController extends \app\components\mgcms\MgCmsController
 
         $zondaApi = new \app\components\ZondaPayAPI($pubkey, $privkey);
 
-        $response = $zondaApi->callApi('/stores/details');
+        $response = $zondaApi->callApi('/payments', [
+            'destinationCurrency' => 'PLN',
+            'orderId' => 'e5rh45uq34udomAEADFGqaddd',
+            'price' => 100,
+            'sourceCurrency' => 'BTC',
+            'keepSourceCurrency' => true
+
+        ], 'POST');
 
 
-        echo '<pre>';
-        echo var_dump($response);
-        echo '</pre>';
-        exit;
-
-
-        $client = new \GuzzleHttp\Client();
-
-        function GetUUID($data)
-        {
-            assert(strlen($data) == 16);
-            $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
-            $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
-            return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+        $res = Json::decode($response);
+        if($res['status'] == 'Ok' && $res['data']['url']){
+            return $this->redirect($res['data']['url']);
         }
 
-        $body = [];
-
-        $body    = '';
-        $time    = time();
-        $sign    = hash_hmac("sha512", $pubkey . $time . $body, $privkey);
-        $headers = array(
-            'API-Key: ' . $pubkey,
-            'API-Hash: ' . $sign,
-            'operation-id: ' . GetUUID(random_bytes(16)),
-            'Request-Timestamp: ' . $time,
-            'Content-Type: application/json'
-        );
-
-        $request = new \GuzzleHttp\Psr7\Request('GET', 'https://api.paywithzonda.com/rest/pay/stores/details?api_key=ddcb401f-0ae6-46c7-9b62-81f9d6a01889', [
-            $headers
-        ]);
-
-//        $response = $client->send($request);
-//
-//        echo '<pre>';
-//        echo var_dump($response);
-//        echo '</pre>';
-//        exit;
-
-        $response = $client->request('GET', 'https://api.paywithzonda.com/rest/pay/stores/details', [
-            'headers' => [
-                'API-Hash' => $sign,
-                'API-Key' => $pubkey,
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-                'Request-Timestamp' => $time,
-                'operation-id' => GetUUID(random_bytes(16)),
-            ],
-        ]);
-
-        echo '<pre>';
-        echo var_dump($response);
-        echo '</pre>';
-        exit;
 
 
         return $this->render('buyTest');
     }
 
-    function gen_uuid() {
-        return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-            // 32 bits for "time_low"
-            mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
 
-            // 16 bits for "time_mid"
-            mt_rand( 0, 0xffff ),
-
-            // 16 bits for "time_hi_and_version",
-            // four most significant bits holds version number 4
-            mt_rand( 0, 0x0fff ) | 0x4000,
-
-            // 16 bits, 8 bits for "clk_seq_hi_res",
-            // 8 bits for "clk_seq_low",
-            // two most significant bits holds zero and one for variant DCE1.1
-            mt_rand( 0, 0x3fff ) | 0x8000,
-
-            // 48 bits for "node"
-            mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
-        );
-    }
 }
