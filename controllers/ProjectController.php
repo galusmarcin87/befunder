@@ -136,8 +136,8 @@ class ProjectController extends \app\components\mgcms\MgCmsController
             $response = $zondaApi->callApi('/payments', [
                 'destinationCurrency' => 'PLN',
                 'orderId' => $payment->id,
-                'price' => $plnToInvest,
-               // 'notificationsUrl' => Url::to(['project/notify', 'hash' => $hash], true),
+                'price' => (double) $plnToInvest,
+                'notificationsUrl' => Url::to(['project/notify', 'hash' => $hash], true),
             ], 'POST');
 
 
