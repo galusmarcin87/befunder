@@ -355,7 +355,7 @@
         },
         dataURI2Blob: function (dataURI) {
             var BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder ||
-                window.MSBlobBuilder, canBlob = $h.hasBlobSupport(), byteStr, arrayBuffer, intArray, i, mimeStr, bb,
+                    window.MSBlobBuilder, canBlob = $h.hasBlobSupport(), byteStr, arrayBuffer, intArray, i, mimeStr, bb,
                 canProceed = (canBlob || BlobBuilder) && window.atob && window.ArrayBuffer && window.Uint8Array;
             if (!canProceed) {
                 return null;
@@ -1085,7 +1085,7 @@
                         loaded: loaded,
                         total: total,
                         bps: fm.bps,
-                        bitrate: self._getSize(fm.bps, self.bitRateUnits),
+                        bitrate: self._getSize(fm.bps, false, self.bitRateUnits),
                         pendingBytes: pendingBytes
                     };
                     if (id) {
@@ -1596,7 +1596,7 @@
                         return;
                     }
                     var fd, outData, fnBefore, fnSuccess, fnError, fnComplete, slice = file.slice ? 'slice' :
-                        (file.mozSlice ? 'mozSlice' : (file.webkitSlice ? 'webkitSlice' : 'slice')),
+                            (file.mozSlice ? 'mozSlice' : (file.webkitSlice ? 'webkitSlice' : 'slice')),
                         blob = file[slice](chunkSize * index, chunkSize * (index + 1));
                     fd = new FormData();
                     f = fm.stack[id];
@@ -2197,7 +2197,7 @@
                         sDrg = $h.ifSet('showDrag', config, $h.ifSet('showDrag', fs, true)),
                         dis = (url === false) && isDisabled;
                     sDwl = sDwl && config.downloadUrl !== false && !!dUrl;
-                    a = self._renderFileActions(config, false,sDwl, sDel, sZm, sDrg, dis, url, key, true, dUrl, dFil);
+                    a = self._renderFileActions(config, false, sDwl, sDel, sZm, sDrg, dis, url, key, true, dUrl, dFil);
                     return self._getLayoutTemplate('footer').setTokens({
                         'progress': self._renderThumbProgress(),
                         'actions': a,
@@ -2335,10 +2335,24 @@
             $error.fadeIn(self.fadeDelay);
             self._raise('filefoldererror', [folders, msg]);
         },
+        showUserError: function (msg, params) {
+            var self = this, fileName;
+            if (!params || !params.fileId) {
+                self.$errorContainer.html('');
+            } else {
+                self.$errorContainer.find('[data-file-id="' + params.fileId + '"]').remove();
+                fileName = self.fileManager.getFileName(params.fileId);
+                if (fileName) {
+                    msg = '<b>' + fileName + ':</b> ' + msg;
+                }
+            }
+            self._showFileError(msg, params, 'fileusererror');
+        },
         _showFileError: function (msg, params, event) {
             var self = this, $error = self.$errorContainer, ev = event || 'fileuploaderror',
                 fId = params && params.fileId || '', e = params && params.id ?
-                '<li data-thumb-id="' + params.id + '" data-file-id="' + fId + '">' + msg + '</li>' : '<li>' + msg + '</li>';
+                    '<li data-thumb-id="' + params.id + '" data-file-id="' + fId + '">' + msg + '</li>' :
+                    '<li>' + msg + '</li>';
 
             if ($error.find('ul').length === 0) {
                 self._addError('<ul>' + e + '</ul>');
@@ -2470,9 +2484,6 @@
                 case 'filereset':
                 case 'fileerror':
                 case 'filefoldererror':
-                case 'fileuploaderror':
-                case 'filebatchuploaderror':
-                case 'filedeleteerror':
                 case 'filecustomerror':
                 case 'filesuccessremove':
                     break;
@@ -2562,7 +2573,7 @@
         _autoFitContent: function () {
             var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
                 self = this, config = width < 400 ? (self.previewSettingsSmall || self.defaults.previewSettingsSmall) :
-                (self.previewSettings || self.defaults.previewSettings), sel;
+                    (self.previewSettings || self.defaults.previewSettings), sel;
             $.each(config, function (cat, settings) {
                 sel = '.file-preview-frame .file-preview-' + cat;
                 self.$preview.find(sel + '.kv-preview-data,' + sel + ' .kv-preview-data').css(settings);
@@ -4164,25 +4175,35 @@
             var self = this;
             $h.addCss(self.$captionContainer, 'icon-visible');
         },
-        _getSize: function (bytes, sizes) {
-            var self = this, size = parseFloat(bytes), i, func = self.fileSizeGetter, out;
+        _getSize: function (bytes, skipTemplate, sizeUnits) {
+            var self = this, size = parseFloat(bytes), i = 0, factor = self.bytesToKB, func = self.fileSizeGetter, out,
+                sizeHuman = size, newSize;
             if (!$.isNumeric(bytes) || !$.isNumeric(size)) {
                 return '';
             }
             if (typeof func === 'function') {
                 out = func(size);
             } else {
-                if (size === 0) {
-                    out = '0.00 B';
-                } else {
-                    if (!sizes) {
-                        sizes = self.sizeUnits;
+                if (size > 0) {
+                    if (!sizeUnits) {
+                        sizeUnits = self.sizeUnits;
                     }
-                    i = Math.floor(Math.log(size) / Math.log(self.bytesToKB));
-                    out = (size / Math.pow(self.bytesToKB, i)).toFixed(2) + ' ' + sizes[i];
+                    while (sizeHuman >= factor) {
+                        sizeHuman /= factor;
+                        ++i;
+                    }
+                    if (!sizeUnits[i]) {
+                        sizeHuman = size;
+                        i = 0;
+                    }
                 }
+                newSize = sizeHuman.toFixed(2);
+                if (newSize == sizeHuman) {
+                    newSize = sizeHuman;
+                }
+                out = newSize + ' ' + sizeUnits[i];
             }
-            return self._getLayoutTemplate('size').replace('{sizeText}', out);
+            return skipTemplate ? out : self._getLayoutTemplate('size').replace('{sizeText}', out);
         },
         _getFileType: function (ftype) {
             var self = this;
@@ -4242,7 +4263,7 @@
                         title = attrs.title;
                     }
                     if (attrs.alt !== undefined && attrs.alt !== null) {
-                        title = attrs.alt;
+                        alt = title = attrs.alt;
                     }
                 }
                 tokens = {
@@ -4570,21 +4591,22 @@
             $btn.attr('title', title);
             $h.setHtml($btn, icon);
         },
-        _checkDimensions: function (i, chk, $img, $thumb, fname, type, params) {
-            var self = this, msg, dim, tag = chk === 'Small' ? 'min' : 'max', limit = self[tag + 'Image' + type],
-                $imgEl, isValid;
-            if ($h.isEmpty(limit) || !$img.length) {
-                return;
+        _isValidSize: function (size, type, $image, $thumb, filename, params) {
+            var self = this, msg, dim, $img, tag = size === 'Small' ? 'min' : 'max', limit = self[tag + 'Image' + type];
+            if ($h.isEmpty(limit) || !$image.length) {
+                return true;
             }
-            $imgEl = $img[0];
-            dim = (type === 'Width') ? $imgEl.naturalWidth || $imgEl.width : $imgEl.naturalHeight || $imgEl.height;
-            isValid = chk === 'Small' ? dim >= limit : dim <= limit;
-            if (isValid) {
-                return;
+            $img = $image[0];
+            dim = (type === 'Width') ? $img.naturalWidth || $img.width : $img.naturalHeight || $img.height;
+            if (size === 'Small' ? dim >= limit : dim <= limit) {
+                return true;
             }
-            msg = self['msgImage' + type + chk].setTokens({'name': fname, 'size': limit});
-            self._showFileError(msg, params);
+            msg = self['msgImage' + type + size] || 'Image "{name}" has a size validation error (limit "{size}").';
+            self._showFileError(msg.setTokens({'name': filename, 'size': limit, 'dimension': dim}), params);
             self._setPreviewError($thumb);
+            self.fileManager.remove($thumb);
+            self._clearFileInput();
+            return false;
         },
         _getExifObj: function (data) {
             var self = this, exifObj, error = $h.logMessages.exifWarning;
@@ -4675,32 +4697,41 @@
                 i = $thumb.attr('data-fileindex'), $img = $thumb.find('img');
             fname = fname || 'Untitled';
             $img.one('load', function () {
+                if ($img.data('validated')) {
+                    return;
+                }
+                $img.data('validated', true);
                 w1 = $thumb.width();
                 w2 = $preview.width();
                 if (w1 > w2) {
                     $img.css('width', '100%');
                 }
                 params = {ind: i, id: previewId, fileId: fileId};
-                self._checkDimensions(i, 'Small', $img, $thumb, fname, 'Width', params);
-                self._checkDimensions(i, 'Small', $img, $thumb, fname, 'Height', params);
-                if (!self.resizeImage) {
-                    self._checkDimensions(i, 'Large', $img, $thumb, fname, 'Width', params);
-                    self._checkDimensions(i, 'Large', $img, $thumb, fname, 'Height', params);
-                }
-                self._raise('fileimageloaded', [previewId]);
-                self.fileManager.addImage(fileId, {
-                    ind: i,
-                    img: $img,
-                    thumb: $thumb,
-                    pid: previewId,
-                    typ: ftype,
-                    siz: fsize,
-                    validated: false,
-                    imgData: iData,
-                    exifObj: exifObj
-                });
-                $thumb.data('exif', exifObj);
-                self._validateAllImages();
+                setTimeout(function () {
+                    var isValidWidth, isValidHeight;
+                    isValidWidth = self._isValidSize('Small', 'Width', $img, $thumb, fname, params);
+                    isValidHeight = self._isValidSize('Small', 'Height', $img, $thumb, fname, params);
+                    if (!self.resizeImage) {
+                        isValidWidth = isValidWidth && self._isValidSize('Large', 'Width', $img, $thumb, fname, params);
+                        isValidHeight = isValidHeight && self._isValidSize('Large', 'Height', $img, $thumb, fname,  params);
+                    }
+                    self._raise('fileimageloaded', [previewId]);
+                    $thumb.data('exif', exifObj);
+                    if (isValidWidth && isValidHeight) {
+                        self.fileManager.addImage(fileId, {
+                            ind: i,
+                            img: $img,
+                            thumb: $thumb,
+                            pid: previewId,
+                            typ: ftype,
+                            siz: fsize,
+                            validated: false,
+                            imgData: iData,
+                            exifObj: exifObj
+                        });
+                        self._validateAllImages();
+                    }
+                }, self.processDelay);
             }).one('error', function () {
                 self._raise('fileimageloaderror', [previewId]);
             });
@@ -5117,9 +5148,10 @@
             var self = this;
             $(document.body).off('focusin.fileinput focusout.fileinput');
             if (self.changeTriggered) {
+                self._toggleLoading('hide');
                 return;
             }
-            self._setLoading('show');
+            self._toggleLoading('show');
             var $el = self.$element, isDragDrop = arguments.length > 1, isAjaxUpload = self.isAjaxUpload,
                 tfiles, files = isDragDrop ? arguments[1] : $el[0].files, ctr = self.fileManager.count(),
                 total, initCount, len, isSingleUpl = $h.isEmpty($el.attr('multiple')),
@@ -5129,7 +5161,7 @@
                     var p1 = $.extend(true, {}, self._getOutData(null, {}, {}, files), {id: previewId, index: index}),
                         p2 = {id: previewId, index: index, file: file, files: files};
                     self.isPersistentError = true;
-                    self._setLoading('hide');
+                    self._toggleLoading('hide');
                     return isAjaxUpload ? self._showFileError(mesg, p1) : self._showError(mesg, p2);
                 },
                 maxCountCheck = function (n, m, all) {
@@ -5173,6 +5205,7 @@
                 if (total > maxCount) {
                     self._resetPreviewThumbs(isAjaxUpload);
                 }
+
             } else {
                 if (inclAll) {
                     total = self._getFileCount(initCount, true);
@@ -5197,8 +5230,16 @@
                     }
                 }
             }
+            if (self.autoReplace) {
+                self._getThumbs().each(function() {
+                    var $thumb = $(this);
+                    if ($thumb.hasClass('file-preview-success') || $thumb.hasClass('file-preview-error')) {
+                        $thumb.remove();
+                    }
+                });
+            }
             self.readFiles(tfiles);
-            self._setLoading('hide');
+            self._toggleLoading('hide');
         },
         _abort: function (params) {
             var self = this, data;
@@ -5316,7 +5357,7 @@
                 $cap.addClass('is-valid');
             }
         },
-        _setLoading: function (type) {
+        _toggleLoading: function (type) {
             var self = this;
             self.$previewStatus.html(type === 'hide' ? '' : self.msgProcessing);
             self.$container.removeClass('file-thumb-loading');
@@ -5332,18 +5373,18 @@
             var self = this, $el = self.$element, $body = $(document.body), ev = 'focusin.fileinput focusout.fileinput';
             if ($body.length) {
                 $body.off(ev).on('focusout.fileinput', function () {
-                    self._setLoading('show');
+                    self._toggleLoading('show');
                 }).on('focusin.fileinput', function () {
                     setTimeout(function () {
                         if (!$el.val()) {
-                            self._setLoading('hide');
+                            self._toggleLoading('hide');
                             self._setFileDropZoneTitle();
                         }
                         $body.off(ev);
                     }, 2500);
                 });
             } else {
-                self._setLoading('hide');
+                self._toggleLoading('hide');
             }
         },
         readFiles: function (files) {
@@ -5355,11 +5396,11 @@
                 fileExt = self.allowedFileExtensions, strExt = $h.isEmpty(fileExt) ? '' : fileExt.join(', '),
                 throwError = function (msg, file, previewId, index, fileId) {
                     var $thumb, p1 = $.extend(true, {}, self._getOutData(null, {}, {}, files),
-                        {id: previewId, index: index, fileId: fileId}),
+                            {id: previewId, index: index, fileId: fileId}),
                         p2 = {id: previewId, index: index, fileId: fileId, file: file, files: files};
                     self._previewDefault(file, true);
                     $thumb = self._getFrame(previewId, true);
-                    self._setLoading('hide');
+                    self._toggleLoading('hide');
                     if (self.isAjaxUpload) {
                         setTimeout(function () {
                             readFile(index + 1);
@@ -5416,10 +5457,10 @@
                     return;
                 }
                 self.lock(true);
-                var file = files[i], id = self._getFileId(file), previewId = previewInitId + '-' + id, fSizeKB, j, msg,
-                    fnImage = settings.image, typ, chk, typ1, typ2,
-                    caption = self._getFileName(file, ''), fileSize = (file && file.size || 0) / self.bytesToKB,
-                    fileExtExpr = '', previewData = $h.createObjectURL(file), fileCount = 0,
+                var file = files[i], id = self._getFileId(file), previewId = previewInitId + '-' + id,
+                    fSize = (file && file.size || 0), sizeHuman = self._getSize(fSize, true), j, msg,
+                    fnImage = settings.image, chk, typ, typ1, typ2, caption = self._getFileName(file, ''),
+                    fileSize = fSize / self.bytesToKB, fileExtExpr = '', previewData = $h.createObjectURL(file), fileCount = 0,
                     strTypes = '', fileId, canLoad, fileReaderAborted = false,
                     func, knownTypes = 0, isImage, txtFlag, processFileLoaded = function () {
                         var isImageResized = !!fm.loadedImages[id], msg = msgProgress.setTokens({
@@ -5466,14 +5507,13 @@
                 if (!$h.isEmpty(fileExt)) {
                     fileExtExpr = new RegExp('\\.(' + fileExt.join('|') + ')$', 'i');
                 }
-                fSizeKB = fileSize.toFixed(2);
                 if (self.isAjaxUpload && fm.exists(fileId) || self._getFrame(previewId, true).length) {
                     var p2 = {id: previewId, index: i, fileId: fileId, file: file, files: files};
-                    msg = self.msgDuplicateFile.setTokens({name: caption, size: fSizeKB});
+                    msg = self.msgDuplicateFile.setTokens({name: caption, size: sizeHuman});
                     if (self.isAjaxUpload) {
                         self.duplicateErrors.push(msg);
                         self.isDuplicateError = true;
-                        self._raise('fileduplicateerror', [file, fileId, caption, fSizeKB, previewId, i]);
+                        self._raise('fileduplicateerror', [file, fileId, caption, sizeHuman, previewId, i]);
                         readFile(i + 1);
                         self._updateFileDetails(numFiles);
                     } else {
@@ -5489,8 +5529,8 @@
                 if (self.maxFileSize > 0 && fileSize > self.maxFileSize) {
                     msg = self.msgSizeTooLarge.setTokens({
                         'name': caption,
-                        'size': fSizeKB,
-                        'maxSize': self.maxFileSize
+                        'size': sizeHuman,
+                        'maxSize': self._getSize(self.maxFileSize * self.bytesToKB, true)
                     });
                     throwError(msg, file, previewId, i, fileId);
                     return;
@@ -5498,8 +5538,8 @@
                 if (self.minFileSize !== null && fileSize <= $h.getNum(self.minFileSize)) {
                     msg = self.msgSizeTooSmall.setTokens({
                         'name': caption,
-                        'size': fSizeKB,
-                        'minSize': self.minFileSize
+                        'size': sizeHuman,
+                        'minSize': self._getSize(self.minFileSize * self.bytesToKB, true)
                     });
                     throwError(msg, file, previewId, i, fileId);
                     return;
@@ -5527,7 +5567,7 @@
                     }
                 }
                 if (!self._canPreview(file)) {
-                    canLoad = self.isAjaxUpload && self._raise('filebeforeload', [file, i, reader]);
+                    canLoad = self._raise('filebeforeload', [file, i, reader]);
                     if (self.isAjaxUpload && canLoad) {
                         fm.add(file);
                     }
@@ -6247,8 +6287,8 @@
         msgPlaceholder: 'Select {files} ...',
         msgZoomModalHeading: 'Detailed Preview',
         msgFileRequired: 'You must select a file to upload.',
-        msgSizeTooSmall: 'File "{name}" (<b>{size} KB</b>) is too small and must be larger than <b>{minSize} KB</b>.',
-        msgSizeTooLarge: 'File "{name}" (<b>{size} KB</b>) exceeds maximum allowed upload size of <b>{maxSize} KB</b>.',
+        msgSizeTooSmall: 'File "{name}" (<b>{size}</b>) is too small and must be larger than <b>{minSize}</b>.',
+        msgSizeTooLarge: 'File "{name}" (<b>{size}</b>) exceeds maximum allowed upload size of <b>{maxSize}</b>.',
         msgFilesTooLess: 'You must select at least <b>{n}</b> {files} to upload.',
         msgFilesTooMany: 'Number of files selected for upload <b>({n})</b> exceeds maximum allowed limit of <b>{m}</b>.',
         msgTotalFilesTooMany: 'You can upload a maximum of <b>{m}</b> files (<b>{n}</b> files detected).',
@@ -6285,15 +6325,15 @@
         msgSelected: '{n} {files} selected',
         msgProcessing: 'Processing ...',
         msgFoldersNotAllowed: 'Drag & drop files only! {n} folder(s) dropped were skipped.',
-        msgImageWidthSmall: 'Width of image file "{name}" must be at least {size} px.',
-        msgImageHeightSmall: 'Height of image file "{name}" must be at least {size} px.',
-        msgImageWidthLarge: 'Width of image file "{name}" cannot exceed {size} px.',
-        msgImageHeightLarge: 'Height of image file "{name}" cannot exceed {size} px.',
+        msgImageWidthSmall: 'Width of image file "{name}" must be at least <b>{size} px</b> (detected <b>{dimension} px</b>).',
+        msgImageHeightSmall: 'Height of image file "{name}" must be at least <b>{size} px</b> (detected <b>{dimension} px</b>).',
+        msgImageWidthLarge: 'Width of image file "{name}" cannot exceed <b>{size} px</b> (detected <b>{dimension} px</b>).',
+        msgImageHeightLarge: 'Height of image file "{name}" cannot exceed <b>{size} px</b> (detected <b>{dimension} px</b>).',
         msgImageResizeError: 'Could not get the image dimensions to resize.',
         msgImageResizeException: 'Error while resizing the image.<pre>{errors}</pre>',
         msgAjaxError: 'Something went wrong with the {operation} operation. Please try again later!',
         msgAjaxProgressError: '{operation} failed',
-        msgDuplicateFile: 'File "{name}" of same size "{size} KB" has already been selected earlier. Skipping duplicate selection.',
+        msgDuplicateFile: 'File "{name}" of same size "{size}" has already been selected earlier. Skipping duplicate selection.',
         msgResumableUploadRetriesExceeded: 'Upload aborted beyond <b>{max}</b> retries for file <b>{file}</b>! Error Details: <pre>{error}</pre>',
         msgPendingTime: '{time} remaining',
         msgCalculatingTime: 'calculating time remaining',
