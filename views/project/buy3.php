@@ -39,7 +39,7 @@ $model = $project;
                     <th><?= Yii::t('db', 'You invest') ?></th><td><?= number_format($amount,2,'.',' ')?> PLN </td>
                 </tr>
                 <tr>
-                    <th><?= Yii::t('db', 'Your expected profit') ?></th><td><?= number_format($amount * ($project->percentage / 100 * $model->investition_time),2,'.',' ')?> PLN </td>
+                    <th><?= Yii::t('db', 'Your expected profit') ?></th><td><?= number_format($amount * ($project->percentage / 100 * (int)$model->investition_time),2,'.',' ')?> PLN </td>
                 </tr>
             </table>
 
@@ -48,8 +48,8 @@ $model = $project;
                     <input hidden name="plnToInvest3" value="<?= $amount?>"/>
                     <input
                             type="submit"
-                            class="btn btn-primary btn-block" style="white-space: pre-wrap;"
-                            value="<?= Yii::t('db', 'Go to Fiber Pay payment gateway to invest'); ?>"
+                            class="button" style="white-space: pre-wrap;"
+                            value="<?= Yii::t('db', 'Go to Zonda Pay payment gateway to invest'); ?>"
                     />
                 </div>
             </div>

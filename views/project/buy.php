@@ -52,7 +52,7 @@ $this->title = Yii::t('db', 'Invest');
 
                 <input
                         type="submit"
-                        class="Contact-form__submit btn btn-primary btn-block"
+                        class="button"
                         value="<?= Yii::t('db', 'Next'); ?>"
                 />
             </div>

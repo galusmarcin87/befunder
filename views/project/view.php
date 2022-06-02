@@ -41,7 +41,7 @@ $index = 0;
                             <?= $this->render('_counterHeader', ['model' => $model]) ?>
                             <?= $this->render('_counterWrapper', ['model' => $model]) ?>
                             <?= $this->render('_counterBody', ['model' => $model]) ?>
-                            <a href="" class="button button--block">ZAINWESTUJ</a>
+                            <a href="<?= Url::to(['project/buy', 'id' => $model->id]) ?>" class="button button--block"><?= Yii::t('db', 'INVEST') ?></a>
                         </div>
                     </div>
 					<div class="col-md-12">

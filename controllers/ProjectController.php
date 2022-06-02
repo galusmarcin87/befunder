@@ -76,10 +76,10 @@ class ProjectController extends \app\components\mgcms\MgCmsController
 //            MgHelpers::setFlash(MgHelpers::FLASH_TYPE_WARNING, Yii::t('db', 'Fill your account data please first'));
 //            return $this->redirect(['site/account']);
 //        }
-        if ($user->status != User::STATUS_VERIFIED) {
-            MgHelpers::setFlash(MgHelpers::FLASH_TYPE_WARNING, Yii::t('db', 'You need to verify by Fiber ID, to do so go to <a href="' . Url::to('site/verify-fiber-id')) . '">Verify</a>');
-            return $this->redirect(['site/account']);
-        }
+//        if ($user->status != User::STATUS_VERIFIED) {
+//            MgHelpers::setFlash(MgHelpers::FLASH_TYPE_WARNING, Yii::t('db', 'You need to verify by Fiber ID, to do so go to <a href="' . Url::to('site/verify-fiber-id')) . '">Verify</a>');
+//            return $this->redirect(['site/account']);
+//        }
 
 
         $project = Project::find()
@@ -128,22 +128,26 @@ class ProjectController extends \app\components\mgcms\MgCmsController
             $payment->user_token = $hash;
             $payment->save();
 
-            $fiberPayConfig = MgHelpers::getConfigParam('fiberPay');
-            $fiberClient = new FiberPayClient($fiberPayConfig['apikey'], $fiberPayConfig['secretkey'], $fiberPayConfig['testServer']);
+            $pubkey = 'ddcb401f-0ae6-46c7-9b62-81f9d6a01889';
+            $privkey = 'a8d4075a-3903-4444-beb9-28833aa9be1e';
 
-            $item = $fiberClient->addCollectItem(
-                $project->fiber_collect_id,
-                $project->pay_description . ' od ' . ($user->first_name . ' ' . $user->last_name),
-                $payment->amount,
-                'PLN',
-                Url::to(['project/notify', 'hash' => $hash], true),
-                $hash, null,
-                Url::to(['site/account'], true)
-            );
-            $itemObj = Json::decode($item);
+            $zondaApi = new \app\components\ZondaPayAPI($pubkey, $privkey);
+
+            $response = $zondaApi->callApi('/payments', [
+                'destinationCurrency' => 'PLN',
+                'orderId' => $payment->id,
+                'price' => $plnToInvest,
+                'notificationsUrl' => Url::to(['project/notify', 'hash' => $hash], true),
+            ], 'POST');
 
 
-            $this->redirect($itemObj['data']['redirect']);
+            $res = Json::decode($response);
+            if ($res['status'] == 'Ok' && $res['data']['url']) {
+                return $this->redirect($res['data']['url']);
+            }else{
+                MgHelpers::setFlashError(Yii::t('db', 'Problem with initialize Zonda Pay'));
+                return $this->render('buy', []);
+            }
         }
 
 
@@ -319,10 +323,9 @@ class ProjectController extends \app\components\mgcms\MgCmsController
 
 
         $res = Json::decode($response);
-        if($res['status'] == 'Ok' && $res['data']['url']){
+        if ($res['status'] == 'Ok' && $res['data']['url']) {
             return $this->redirect($res['data']['url']);
         }
-
 
 
         return $this->render('buyTest');

@@ -26,7 +26,7 @@ $model = $project;
             <h3>
                 <?= Yii::t('db', 'You invest in project'); ?> <?= $project ?>&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="<?= $project->linkUrl ?>" target="_blank"
-                   class="btn btn-success"><?= Yii::t('db', 'Link to investition') ?></a>
+                   class="button"><?= Yii::t('db', 'Link to investition') ?></a>
             </h3>
 
             <?php
@@ -64,7 +64,7 @@ $model = $project;
                             </span>
                             <span>
                               <strong>
-                                <?= number_format($amount,2,'.',' ') ?> PLN 
+                                <?= number_format($amount,2,'.',' ') ?> PLN
                               </strong>
                             </span>
                         </li>
@@ -83,7 +83,7 @@ $model = $project;
                               <?= Yii::t('db', 'Expected profit'); ?>:
                             </span>
                             <span>
-                              <strong> <?=  number_format($amount * ($model->percentage / 100 * $model->investition_time),2,'.',' ') ?> PLN </strong>
+                              <strong> <?=  number_format($amount * ($model->percentage / 100 * (int)$model->investition_time),2,'.',' ') ?> PLN </strong>
                             </span>
                         </li>
 
@@ -92,7 +92,7 @@ $model = $project;
                               <?= Yii::t('db', 'Expected return with profit'); ?>:
                             </span>
                             <span>
-                              <strong> <?= number_format($amount * ($model->percentage / 100 * $model->investition_time) + $amount,2,'.',' ') ?> PLN </strong>
+                              <strong> <?= number_format($amount * ($model->percentage / 100 * (int)$model->investition_time) + $amount,2,'.',' ') ?> PLN </strong>
                             </span>
                         </li>
                     </ul>
@@ -141,7 +141,7 @@ $model = $project;
             <div class="row">
                 <div class="col-md-3">
                     <input hidden name="plnToInvest2" value="<?= $amount ?>"/>
-                    <a href="javascript:history.back()" class="btn btn-primary btn-block">
+                    <a href="javascript:history.back()" class="button">
                         <?= Yii::t('db', 'Back') ?>
                     </a>
 
@@ -149,7 +149,7 @@ $model = $project;
                 <div class="col-md-3">
                     <input
                             type="submit"
-                            class="btn btn-primary btn-block"
+                            class="button"
                             value="<?= Yii::t('db', 'Invest'); ?>"
                     />
                 </div>
