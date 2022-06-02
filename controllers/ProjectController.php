@@ -137,7 +137,7 @@ class ProjectController extends \app\components\mgcms\MgCmsController
                 'destinationCurrency' => 'PLN',
                 'orderId' => $payment->id,
                 'price' => $plnToInvest,
-                'notificationsUrl' => Url::to(['project/notify', 'hash' => $hash], true),
+               // 'notificationsUrl' => Url::to(['project/notify', 'hash' => $hash], true),
             ], 'POST');
 
 
