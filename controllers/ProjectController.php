@@ -145,6 +145,10 @@ class ProjectController extends \app\components\mgcms\MgCmsController
             if ($res['status'] == 'Ok' && $res['data']['url']) {
                 return $this->redirect($res['data']['url']);
             }else{
+                echo '<pre>';
+                echo var_dump($res);
+                echo '</pre>';
+                exit;
                 MgHelpers::setFlashError(Yii::t('db', 'Problem with initialize Zonda Pay'));
                 return $this->render('buy', []);
             }
