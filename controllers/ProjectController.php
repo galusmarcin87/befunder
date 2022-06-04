@@ -176,45 +176,52 @@ class ProjectController extends \app\components\mgcms\MgCmsController
         \Yii::info(JSON::encode($this->request->headers), 'own');
         \Yii::info(JSON::encode($this->request->rawBody), 'own');
 
-        $body = JSON::decode($this->request->rawBody);
+        try {
+            $body = JSON::decode($this->request->rawBody);
 
 
-        $status = $body['status'];
-        \Yii::info($status, 'own');
+            $status = $body['status'];
+            \Yii::info($status, 'own');
 
-        $hashDecoded = JSON::decode(MgHelpers::decrypt($hash));
-        \Yii::info($hashDecoded, 'own');
-        $paymentId = $hashDecoded['paymentId'];
-        $userId = $hashDecoded['userId'];
-        $payment = Payment::find()->where(['id' => $paymentId, 'user_id' => $userId])->one();
-        if (!$payment) {
-            $this->throw404();
+            $hashDecoded = JSON::decode(MgHelpers::decrypt($hash));
+            \Yii::info($hashDecoded, 'own');
+            $paymentId = $hashDecoded['paymentId'];
+            $userId = $hashDecoded['userId'];
+            $payment = Payment::find()->where(['id' => $paymentId, 'user_id' => $userId])->one();
+            if (!$payment) {
+                $this->throw404();
+            }
+
+            if ($payment->status == Payment::STATUS_PAYMENT_CONFIRMED) {
+                \Yii::info('already confirmed ' . $payment->id, 'own');
+            }
+
+            switch ($status) {
+                case 'PAID':
+                    $payment->status = Payment::STATUS_PAYMENT_CONFIRMED;
+                    $project = $payment->project;
+                    $project->money += $payment->amount;
+                    $saved = $project->save();
+                    break;
+                default:
+                    $payment->status = Payment::STATUS_UNKNOWN;
+                    break;
+            }
+            $saved = $payment->save();
+
+
+            \Yii::info('saved ' . $saved, 'own');
+
+            Yii::$app->mailer->compose('afterBuy', ['model' => $payment])
+                ->setTo($payment->user->email)
+                ->setFrom([MgHelpers::getSetting('email from') => MgHelpers::getSetting('email from name')])
+                ->setSubject(Yii::t('db', 'Thank you for purchase'))
+                ->send();
+
+            \Yii::info('mail ', 'own');
+        }catch(Exception $e){
+            \Yii::error($e->getMessage(), 'own');
         }
-
-        switch ($status) {
-            case 'PAID':
-                $payment->status = Payment::STATUS_PAYMENT_CONFIRMED;
-                $project = $payment->project;
-                $project->money += $payment->amount;
-                $saved = $project->save();
-                break;
-            default:
-                $payment->status = Payment::STATUS_UNKNOWN;
-                break;
-        }
-        $saved = $payment->save();
-
-
-        \Yii::info('saved ' . $saved, 'own');
-
-        Yii::$app->mailer->compose('afterBuy', ['model' => $payment])
-            ->setTo($payment->user->email)
-            ->setFrom([MgHelpers::getSetting('email from') => MgHelpers::getSetting('email from name')])
-            ->setSubject(Yii::t('db', 'Thank you for purchase'))
-            ->send();
-
-        \Yii::info('mail ', 'own');
-
         return 'OK';
     }
 
@@ -302,50 +309,6 @@ class ProjectController extends \app\components\mgcms\MgCmsController
 
     public function actionBuyTest()
     {
-        $this->request->rawBody = "{\"paymentId\":\"287fda91-b229-4183-9860-64cc769eef49\",\"orderId\":\"69\",\"amountToPayInSourceCurrency\":0.00136831,\"amountToPayInDestinationCurrency\":10.05,\"status\":\"PAID\",\"paidAmount\":0.00136831,\"price\":10,\"initialValues\":null}";
-        $body = JSON::decode($this->request->rawBody);
-
-
-
-
-        $status = $body->status;
-        \Yii::info($status, 'own');
-
-        $hashDecoded = JSON::decode(MgHelpers::decrypt($hash));
-        \Yii::info($hashDecoded, 'own');
-        $paymentId = $hashDecoded['paymentId'];
-        $userId = $hashDecoded['userId'];
-        $payment = Payment::find()->where(['id' => $paymentId, 'user_id' => $userId])->one();
-        if (!$payment) {
-            $this->throw404();
-        }
-
-        switch ($status) {
-            case 'PAID':
-                $payment->status = Payment::STATUS_PAYMENT_CONFIRMED;
-                $project = $payment->project;
-                $project->money += $payment->amount;
-                $saved = $project->save();
-                break;
-            default:
-                $payment->status = Payment::STATUS_UNKNOWN;
-                break;
-        }
-        $saved = $payment->save();
-
-
-        \Yii::info('saved ' . $saved, 'own');
-
-        Yii::$app->mailer->compose('afterBuy', ['model' => $payment])
-            ->setTo($payment->user->email)
-            ->setFrom([MgHelpers::getSetting('email from') => MgHelpers::getSetting('email from name')])
-            ->setSubject(Yii::t('db', 'Thank you for purchase'))
-            ->send();
-
-        \Yii::info('mail ', 'own');
-
-        return 'OK';
-
 
         $pubkey = 'ddcb401f-0ae6-46c7-9b62-81f9d6a01889';
         $privkey = 'a8d4075a-3903-4444-beb9-28833aa9be1e';
