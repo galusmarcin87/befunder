@@ -169,6 +169,7 @@ class ProjectController extends \app\components\mgcms\MgCmsController
     public function actionNotify($hash)
     {
         \Yii::info("notify", 'own');
+        \Yii::info($hash, 'own');
 
 //        $headers = JSON::decode('{"user-agent":["Apache-HttpClient/4.1.1 (java 1.5)"],"content-type":["application/json"],"accept":["application/json"],"api-key":["dNlZtEJrvaJDJ5EX"],"content-length":["1484"],"connection":["close"],"host":["piesto.vertesprojekty.pl"]}');
 //        $body = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjp7Im9yZGVySXRlbSI6eyJkYXRhIjp7ImNvZGUiOiJhM3h2NnpnOSIsInN0YXR1cyI6InJlY2VpdmVkIiwidHlwZSI6ImNvbGxlY3RfaXRlbSIsImN1cnJlbmN5IjoiUExOIiwiYW1vdW50IjoiOC4wMCIsImZlZXMiOltdLCJ0b05hbWUiOiJhc2RzYSIsInBhcmVudENvZGUiOiJheWsyZ3FqczZoZDUiLCJkZXNjcmlwdGlvbiI6IlBpZXN0byIsIm1ldGFkYXRhIjpudWxsLCJjcmVhdGVkQXQiOiIyMDIxLTA2LTMwIDIxOjUyOjA3IiwidXBkYXRlZEF0IjoiMjAyMS0wNi0zMCAyMTo1MjoyMCIsInJlZGlyZWN0IjoiaHR0cHM6XC9cL3Rlc3QuZmliZXJwYXkucGxcL29yZGVyXC9hM3h2NnpnOSJ9LCJpbnZvaWNlIjp7ImFtb3VudCI6IjguMDAiLCJjdXJyZW5jeSI6IlBMTiIsImliYW4iOiJQTDE5MTk0MDEwNzYzMjAyODAxMDAwMDJURVNUIiwiYmJhbiI6IjE5MTk0MDEwNzYzMjAyODAxMDAwMDJURVNUIiwiZGVzY3JpcHRpb24iOiJhM3h2NnpnOSJ9LCJsaW5rcyI6eyJyZWwiOiJzZWxmIiwiaHJlZiI6Imh0dHBzOlwvXC9hcGl0ZXN0LmZpYmVycGF5LnBsXC8xLjBcL29yZGVyc1wvY29sbGVjdFwvaXRlbVwvYTN4djZ6ZzkifX0sInRyYW5zYWN0aW9uIjp7ImRhdGEiOnsiY29udHJhY3Rvck5hbWUiOiJGaWJlclBheSAtIHphcFx1MDE0MmFjb25vIHByemV6IHRlc3RlciIsImNvbnRyYWN0b3JJYmFuIjoiRmliZXJQYXkiLCJhbW91bnQiOiI4LjAwIiwiY3VycmVuY3kiOiJQTE4iLCJkZXNjcmlwdGlvbiI6ImEzeHY2emc5IiwiYmFua1JlZmVyZW5jZUNvZGUiOiJURVNUX2FrNGJobmVjIiwib3BlcmF0aW9uQ29kZSI6bnVsbCwiYWNjb3VudEliYW4iOiIiLCJib29rZWRBdCI6IjIwMjEtMDYtMzAgMjE6NTI6MjAiLCJjcmVhdGVkQXQiOiIyMDIxLTA2LTMwIDIxOjUyOjIwIiwidXBkYXRlZEF0IjoiMjAyMS0wNi0zMCAyMTo1MjoyMCJ9LCJ0eXBlIjoiYmFua1RyYW5zYWN0aW9uIn0sInR5cGUiOiJjb2xsZWN0X29yZGVyX2l0ZW1fcmVjZWl2ZWQiLCJjdXN0b21QYXJhbXMiOm51bGx9LCJpc3MiOiJGaWJlcnBheSIsImlhdCI6MTYyNTA4Mjc4NH0.5UqfPL-CF-58Si1wAEQ1fiZjwknxPxLu08cWgfJMm80';
@@ -301,6 +302,49 @@ class ProjectController extends \app\components\mgcms\MgCmsController
 
     public function actionBuyTest()
     {
+        $this->request->rawBody = "{\"paymentId\":\"287fda91-b229-4183-9860-64cc769eef49\",\"orderId\":\"69\",\"amountToPayInSourceCurrency\":0.00136831,\"amountToPayInDestinationCurrency\":10.05,\"status\":\"PAID\",\"paidAmount\":0.00136831,\"price\":10,\"initialValues\":null}";
+        $body = JSON::decode($this->request->rawBody);
+
+
+
+
+        $status = $body->status;
+        \Yii::info($status, 'own');
+
+        $hashDecoded = JSON::decode(MgHelpers::decrypt($hash));
+        \Yii::info($hashDecoded, 'own');
+        $paymentId = $hashDecoded['paymentId'];
+        $userId = $hashDecoded['userId'];
+        $payment = Payment::find()->where(['id' => $paymentId, 'user_id' => $userId])->one();
+        if (!$payment) {
+            $this->throw404();
+        }
+
+        switch ($status) {
+            case 'PAID':
+                $payment->status = Payment::STATUS_PAYMENT_CONFIRMED;
+                $project = $payment->project;
+                $project->money += $payment->amount;
+                $saved = $project->save();
+                break;
+            default:
+                $payment->status = Payment::STATUS_UNKNOWN;
+                break;
+        }
+        $saved = $payment->save();
+
+
+        \Yii::info('saved ' . $saved, 'own');
+
+        Yii::$app->mailer->compose('afterBuy', ['model' => $payment])
+            ->setTo($payment->user->email)
+            ->setFrom([MgHelpers::getSetting('email from') => MgHelpers::getSetting('email from name')])
+            ->setSubject(Yii::t('db', 'Thank you for purchase'))
+            ->send();
+
+        \Yii::info('mail ', 'own');
+
+        return 'OK';
 
 
         $pubkey = 'ddcb401f-0ae6-46c7-9b62-81f9d6a01889';
