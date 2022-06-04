@@ -175,17 +175,12 @@ class ProjectController extends \app\components\mgcms\MgCmsController
         \Yii::info(JSON::encode($this->request->headers), 'own');
         \Yii::info(JSON::encode($this->request->rawBody), 'own');
 
-        $body = $this->request->rawBody;
-        $headers = $this->request->headers;
-        $jwtDecoded = JWT::decode($body);
-        $status = $jwtDecoded->payload->orderItem->data->status;
+        $body = JSON::decode($this->request->rawBody);
+
+
+        $status = $body->status;
         \Yii::info($status, 'own');
-        $fiberPayConfig = MgHelpers::getConfigParam('fiberPay');
-        $apiKey = $headers['api-key'];
-        \Yii::info($apiKey, 'own');
-        if ($apiKey != $fiberPayConfig['apikey']) {
-            $this->throw404();
-        }
+
         $hashDecoded = JSON::decode(MgHelpers::decrypt($hash));
         \Yii::info($hashDecoded, 'own');
         $paymentId = $hashDecoded['paymentId'];
@@ -196,14 +191,11 @@ class ProjectController extends \app\components\mgcms\MgCmsController
         }
 
         switch ($status) {
-            case 'received':
+            case 'PAID':
                 $payment->status = Payment::STATUS_PAYMENT_CONFIRMED;
                 $project = $payment->project;
                 $project->money += $payment->amount;
                 $saved = $project->save();
-                break;
-            case 'Canceled':
-                $payment->status = Payment::STATUS_SUSPENDED;
                 break;
             default:
                 $payment->status = Payment::STATUS_UNKNOWN;
