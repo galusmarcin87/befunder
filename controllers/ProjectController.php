@@ -86,8 +86,8 @@ class ProjectController extends \app\components\mgcms\MgCmsController
             ->where(['status' => Project::STATUS_ACTIVE, 'id' => $id])
             ->one();
 
-        if (!$project->fiber_collect_id) {
-            MgHelpers::setFlashError(Yii::t('db', 'Project does not have fiber collect id'));
+        if (!$project->public_key || !$project->private_key) {
+            MgHelpers::setFlashError(Yii::t('db', 'Project does not have payment configured'));
             return $this->back();
         }
 
@@ -121,15 +121,15 @@ class ProjectController extends \app\components\mgcms\MgCmsController
             $payment->user_id = $this->getUserModel()->id;
             $payment->status = Payment::STATUS_NEW;
             $payment->project_id = $project->id;
-            $payment->percentage = rand(1000, 10000); //sessionId
+            $payment->percentage = $project->percentage; //sessionId
             $payment->user_token = 'aaa';
             $saved = $payment->save();
             $hash = MgHelpers::encrypt(JSON::encode(['userId' => $payment->user_id, 'paymentId' => $payment->id]));
             $payment->user_token = $hash;
             $payment->save();
 
-            $pubkey = 'ddcb401f-0ae6-46c7-9b62-81f9d6a01889';
-            $privkey = 'a8d4075a-3903-4444-beb9-28833aa9be1e';
+            $pubkey = $project->public_key;
+            $privkey = $project->private_key;
 
             $zondaApi = new \app\components\ZondaPayAPI($pubkey, $privkey);
 

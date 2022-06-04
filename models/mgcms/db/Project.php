@@ -46,6 +46,8 @@ use yii\helpers\Html;
  * @property string $pay_description
  * @property string $pay_name
  * @property integer $value
+ * @property string $public_key
+ * @property string $private_key
  *
  * @property \app\models\mgcms\db\Bonus[] $bonuses
  * @property \app\models\mgcms\db\Payment[] $payments
@@ -73,10 +75,10 @@ class Project extends \app\models\mgcms\db\AbstractRecord
         return [
             [['name', 'file_id'], 'required'],
             [['gps_lat', 'gps_long', 'money', 'money_full', 'percentage', 'percentage_presale_bonus'], 'number'],
-            [['lead', 'text', 'text2', 'buy_token_info', 'fiber_collect_id','iban','pay_description','pay_name'], 'string'],
+            [['lead', 'text', 'text2', 'buy_token_info', 'fiber_collect_id', 'iban', 'pay_description', 'pay_name'], 'string'],
             [['file_id', 'token_value', 'token_to_sale', 'token_minimal_buy', 'token_left', 'flag_id', 'created_by', 'value'], 'integer'],
             [['date_presale_start', 'date_presale_end', 'date_crowdsale_start', 'date_crowdsale_end', 'date_realization_profit'], 'safe'],
-            [['name', 'localization', 'whitepaper', 'www', 'token_blockchain'], 'string', 'max' => 245],
+            [['name', 'localization', 'whitepaper', 'www', 'token_blockchain', 'public_key', 'private_key'], 'string', 'max' => 245],
             [['status', 'investition_time', 'token_currency'], 'string', 'max' => 45]
         ];
     }
@@ -205,7 +207,8 @@ class Project extends \app\models\mgcms\db\AbstractRecord
         return $this->file && $this->file->isImage() ? Html::img($this->file->getImageSrc(140, 100)) : '';
     }
 
-    public function getLtv(){
-        return $this->value ? (number_format($this->money_full / $this->value, 2) * 100).'%' : '';
+    public function getLtv()
+    {
+        return $this->value ? (number_format($this->money_full / $this->value, 2) * 100) . '%' : '';
     }
 }
