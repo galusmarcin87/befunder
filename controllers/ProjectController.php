@@ -194,6 +194,7 @@ class ProjectController extends \app\components\mgcms\MgCmsController
 
             if ($payment->status == Payment::STATUS_PAYMENT_CONFIRMED) {
                 \Yii::info('already confirmed ' . $payment->id, 'own');
+                return 'ok';
             }
 
             switch ($status) {
