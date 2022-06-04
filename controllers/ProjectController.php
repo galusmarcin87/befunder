@@ -220,7 +220,7 @@ class ProjectController extends \app\components\mgcms\MgCmsController
 
             \Yii::info('mail ', 'own');
         }catch(Exception $e){
-            \Yii::error($e->getMessage(), 'own');
+            \Yii::info('error: ' . $e->getMessage(), 'own');
         }
         return 'OK';
     }
