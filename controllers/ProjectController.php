@@ -179,7 +179,7 @@ class ProjectController extends \app\components\mgcms\MgCmsController
         $body = JSON::decode($this->request->rawBody);
 
 
-        $status = $body->status;
+        $status = $body['status'];
         \Yii::info($status, 'own');
 
         $hashDecoded = JSON::decode(MgHelpers::decrypt($hash));
