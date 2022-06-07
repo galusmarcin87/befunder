@@ -45,3 +45,6 @@
 .section {
   padding: 0;
 }
+button.close {
+  border: none;
+}

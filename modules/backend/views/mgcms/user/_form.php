@@ -44,6 +44,7 @@ use yii\helpers\Url;
             <?= $form->field($model, 'last_name')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('last_name')]) ?>
 
         </div>
+
         <div class="col-md-4">
             <?= $form->field($model, 'role')->dropDownList(MgHelpers::arrayCombineFromOneArray(Yii::$app->params['roles']), ['maxlength' => true]) ?>
 
@@ -57,6 +58,9 @@ use yii\helpers\Url;
 
         </div>
         <div class="col-md-4">
+            <?= $form->field($model, 'position')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('position')]) ?>
+        </div>
+        <div class="col-md-4">
             <?= $form->field($model, 'birthdate')->datePicker(); ?>
         </div>
         <div class="col-md-4">
@@ -64,6 +68,61 @@ use yii\helpers\Url;
 
         </div>
 
+        <div class="col-md-4">
+            <?= $form->field($model, 'country')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('country')]) ?>
+
+        </div>
+        <div class="col-md-4">
+            <?= $form->field($model, 'postcode')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('postcode')]) ?>
+
+        </div>
+        <div class="col-md-4">
+            <?= $form->field($model, 'city')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('city')]) ?>
+
+        </div>
+        <div class="col-md-4">
+            <?= $form->field($model, 'address')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('address')]) ?>
+
+        </div>
+
+
+
+        <?= $form->field4md($model, 'citizenship')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('citizenship')]) ?>
+        <?= $form->field12md($model, 'id_document_no')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('id_document_no')]) ?>
+        <?= $form->field4md($model, 'pesel')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('pesel')]) ?>
+        <?= $form->field4md($model, 'phone')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('phone')]) ?>
+        <?= $form->field4md($model, 'bank_no')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('bank_no')]) ?>
+
+        <div class="col-md-4 hidden">
+            <?= $this->render('/common/_fileModalChooser', [
+                'model' => $model,
+                'form' => $form]) ?>
+        </div>
+
+        <div class="col-md-12 hidden-xs hidden">
+            <?= $form->field($model, 'file_text')->textarea(['rows' => 8]) ?>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <legend><?= Yii::t('db', 'Corespondence') ?></legend>
+        <?= $form->field4md($model, 'cor_first_name')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('cor_first_name')]) ?>
+        <?= $form->field4md($model, 'cor_last_name')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('cor_last_name')]) ?>
+        <?= $form->field4md($model, 'cor_country')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('cor_country')]) ?>
+        <?= $form->field4md($model, 'cor_postcode')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('cor_postcode')]) ?>
+        <?= $form->field4md($model, 'cor_city')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('cor_city')]) ?>
+        <?= $form->field4md($model, 'cor_street')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('cor_street')]) ?>
+        <?= $form->field4md($model, 'cor_house_no')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('cor_house_no')]) ?>
+        <?= $form->field4md($model, 'cor_flat_no')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('cor_citycor_flat_no')]) ?>
+
+    </div>
+
+
+
+    <div class="row">
+
+        <legend><?= Yii::t('db', 'Social media') ?></legend>
         <div class="col-md-4">
             <?= $form->field($model, 'facebook')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('facebook')]) ?>
         </div>
@@ -76,19 +135,8 @@ use yii\helpers\Url;
         <div class="col-md-4">
             <?= $form->field($model, 'tumblr')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('tumblr')]) ?>
         </div>
-        <div class="col-md-4">
-            <?= $form->field($model, 'position')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('position')]) ?>
-        </div>
 
-        <div class="col-md-4">
-            <?= $this->render('/common/_fileModalChooser', [
-                'model' => $model,
-                'form' => $form]) ?>
-        </div>
 
-        <div class="col-md-12">
-            <?= $form->field($model, 'file_text')->textarea(['rows' => 8]) ?>
-        </div>
 
 
 
