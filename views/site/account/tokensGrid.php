@@ -11,7 +11,7 @@ use app\models\mgcms\db\Payment;
 use kartik\grid\GridView;
 
 $searchModel = new \app\models\mgcms\db\PaymentSearch();
-$searchParams = ['PaymentSearch' => ['user_id' => $user->id]];
+$searchParams = ['PaymentSearch' => ['user_id' => $user->id,'status' => Payment::STATUS_PAYMENT_CONFIRMED]];
 $dataProvider = $searchModel->search($searchParams);
 
 

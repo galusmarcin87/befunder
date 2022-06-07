@@ -65,10 +65,10 @@ use app\components\mgcms\MgHelpers;
             'user_id' => $this->user_id,
             'amount' => $this->amount,
             'percentage' => $this->percentage,
+            'status' =>  $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'status', $this->status])
-            ->andFilterWhere(['like', 'is_preico', $this->is_preico])
+        $query->andFilterWhere(['like', 'is_preico', $this->is_preico])
             ->andFilterWhere(['like', 'user_token', $this->user_token]);
 
         return $dataProvider;
