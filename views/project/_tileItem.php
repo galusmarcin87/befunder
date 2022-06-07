@@ -16,9 +16,9 @@ $model->language = Yii::$app->language;
 <p>
     <?= Yii::t('db', 'Localization') ?>: <?= $model->localization ?>
     <br/>
-    <?= Yii::t('db', 'Investition amount') ?>: <?= $model->localization ?>
+    <?= Yii::t('db', 'Investition amount') ?>: <?= $model->value ?>
     <br/>
-    <?= Yii::t('db', 'Profit') ?>:
+    <?= Yii::t('db', 'Profit') ?>: <?= $model->percentage ?>
 </p>
 <a href="<?= $model->linkUrl ?>"><?= Yii::t('db', 'DETAILS') ?> >></a>
 <?= $this->render('_counterHeader', ['model' => $model]) ?>
