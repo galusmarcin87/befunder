@@ -28,7 +28,7 @@ $this->title = Yii::t('db', 'Invest');
             ?>
 
 
-            <div class="col-md-4">
+            <div class="col-md-4 offset-5">
                 <label class="Contact-form__label field-user-first_name">
                     <div class="Contact-form__label" style="display: none">
                         <?= Yii::t('db', 'Tokens to invest'); ?>
