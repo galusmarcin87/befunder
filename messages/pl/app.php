@@ -9,7 +9,7 @@ $arr = [
     'Date Crowdsale End' => 'Data końca',
     'Percentage Presale Bonus' => 'Presale bonus',
     'Date Realization Profit' => 'Data realizacji zysku',
-    'Token Value' => 'Kurs tokenu',
+    'Token Value' => 'Kurs tokenu (Kwota w PLN)',
     'Token Blockchain' => 'Blockchain tokenu',
     'Token To Sale' => 'Ilość tokenów w sprzedaży',
     'Token Minimal Buy' => 'Minimalny zakup',
@@ -337,6 +337,14 @@ or <b>=</b>) na początku każdej wyszukiwanej wartości.',
     'Choose file' => 'Wybierz plik',
     'Edit menu item' => 'Edytuj pozycję menu',
     'Incorrect username or password.' => 'Nieprawidłowy login lub hasło',
+    'Money Full' => 'Maksymalna kwota zbiórki',
+    'Money' => 'Suma zebranych środków',
+    'Date Presale Start' => 'Przedsprzedaż od',
+    'Date Presale End' => 'Przedsprzedaż do',
+    'Date Crowdsale Start' => 'Zbiórka od',
+    'Date Crowdsale End' => 'Zbiórka do',
+    'Presale bonus' => 'Bonus w %, jaki otrzyma Inwestor w przedsprzedaży',
+    'Payment value' => 'Kwota zainwestowanych środków (w PLN)',
 ];
 
 return $arr;

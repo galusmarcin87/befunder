@@ -110,14 +110,14 @@ class Project extends \app\models\mgcms\db\AbstractRecord
             'flag_id' => Yii::t('app', 'Flaga'),
             'whitepaper' => Yii::t('app', 'Whitepaper'),
             'www' => Yii::t('app', 'Www'),
-            'money' => Yii::t('db', 'Money'),
-            'money_full' => Yii::t('db', 'Money Full'),
-            'investition_time' => Yii::t('db', 'Investition Time'),
-            'percentage' => Yii::t('db', 'Percentage'),
-            'date_presale_start' => Yii::t('db', 'Date Presale Start'),
-            'date_presale_end' => Yii::t('db', 'Date Presale End'),
-            'date_crowdsale_start' => Yii::t('db', 'Date Crowdsale Start'),
-            'date_crowdsale_end' => Yii::t('db', 'Date Crowdsale End'),
+            'money' => Yii::t('app', 'Money'),
+            'money_full' => Yii::t('app', 'Money Full'),
+            'investition_time' => Yii::t('app', 'Investition Time'),
+            'percentage' => Yii::t('app', 'Percentage'),
+            'date_presale_start' => Yii::t('app', 'Date Presale Start'),
+            'date_presale_end' => Yii::t('app', 'Date Presale End'),
+            'date_crowdsale_start' => Yii::t('app', 'Date Crowdsale Start'),
+            'date_crowdsale_end' => Yii::t('app', 'Date Crowdsale End'),
             'percentage_presale_bonus' => Yii::t('app', 'Percentage Presale Bonus'),
             'date_realization_profit' => Yii::t('app', 'Date Realization Profit'),
             'token_value' => Yii::t('app', 'Token Value'),
@@ -130,8 +130,8 @@ class Project extends \app\models\mgcms\db\AbstractRecord
             'token_currency' => Yii::t('app', 'Token currency'),
             'downloadFiles' => Yii::t('app', 'Files to download'),
             'created_by' => Yii::t('app', 'Created by'),
-            'link' => Yii::t('db', 'Project link'),
-            'daysLeft' => Yii::t('db', 'Days left to the end of investition'),
+            'link' => Yii::t('app', 'Project link'),
+            'daysLeft' => Yii::t('app', 'Days left to the end of investition'),
             'thumbFront' => '',
             'value' => 'Wartość inwestycji'
 
@@ -194,7 +194,7 @@ class Project extends \app\models\mgcms\db\AbstractRecord
 
     public function getLink()
     {
-        return Html::a(Yii::t('db', 'See'), \yii\helpers\Url::to(['/project/view', 'name' => $this->name]));
+        return Html::a(Yii::t('app', 'See'), \yii\helpers\Url::to(['/project/view', 'name' => $this->name]));
     }
 
     public function getDaysLeft()
