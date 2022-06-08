@@ -43,7 +43,7 @@ $dataProvider = $searchModel->search($searchParams);
             'attribute' => 'created_on',
             'label' => Yii::t('db', 'Payment date')
         ],
-        'project.investition_time',
+        'project.date_realization_profit',
         //'project.daysLeft',
         //'benefitWithAmount:numberSeparatedWithSpace',
 //        [
