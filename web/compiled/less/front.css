@@ -48,3 +48,22 @@
 button.close {
   border: none;
 }
+.minWidthAuto {
+  min-width: auto;
+}
+.inlineBlock {
+  display: inline-block;
+}
+.nav-link {
+  color: #ffbe00;
+}
+.languageSwitcher .dropdown-menu {
+  background: black;
+  border: 1px solid #ffbe00;
+}
+.languageSwitcher .dropdown-menu .dropdown-item {
+  color: #ffbe00;
+}
+.languageSwitcher .dropdown-menu .dropdown-item:hover {
+  background-color: #111111;
+}

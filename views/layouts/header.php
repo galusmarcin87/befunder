@@ -49,9 +49,21 @@ $menu = new NobleMenu(['name' => 'header_' . Yii::$app->language, 'loginLink' =>
                             <a href="javascript:submitLogoutForm()"
                                "> <?= Yii::t('db', 'Log out'); ?> </a>
                         <? endif; ?>
+
+                        <div class="nav-item dropdown inlineBlock languageSwitcher">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <?= strtoupper(Yii::$app->language) ?>
+                            </a>
+                            <ul class="dropdown-menu minWidthAuto" aria-labelledby="navbarDropdown">
+                                <? foreach (Yii::$app->params['languagesDisplay'] as $language) : ?>
+                                    <a class="dropdown-item" href="<?= yii\helpers\Url::to(['/', 'language' => $language]) ?>"><?= strtoupper($language) ?></a>
+                                <? endforeach ?>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
     <nav class="menu">
