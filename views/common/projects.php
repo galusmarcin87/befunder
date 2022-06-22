@@ -16,6 +16,10 @@ $tabsConfig = [];
 foreach ($tabsStatuses as $status) {
     $provider = $projectSearch->search([], $status);
     $provider->pagination = false;
+    $provider->sort->defaultOrder = [
+        'order' => SORT_ASC,
+    ];
+
 
     $tabsConfig[] = [
         'name' => Project::STATUSES_EN[$status],
@@ -29,6 +33,9 @@ foreach ($tabsStatuses as $status) {
 
 $provider = $projectSearch->search([], [Project::STATUS_ACTIVE]);
 $provider->pagination = false;
+$provider->sort->defaultOrder = [
+    'order' => SORT_ASC,
+];
 $provider->query->limit(3);
 echo ListView::widget([
     'dataProvider' => $provider,

@@ -34,6 +34,11 @@ class ProjectController extends \app\components\mgcms\MgCmsController
             'pagination' => [
                 'pageSize' => 3,
             ],
+            'sort' => [
+                'defaultOrder' => [
+                    'order' => SORT_ASC,
+                ]
+            ],
         ]);
 
         return $this->render('index', [

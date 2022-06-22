@@ -174,11 +174,11 @@ yii\jui\JuiAsset::register($this);
             ]); ?>
         <?endif?>
 
-        <?= $form->field6md($model, 'public_key')->textInput(['placeholder' => '']) ?>
+        <?= $form->field4md($model, 'public_key')->textInput(['placeholder' => '']) ?>
 
-        <?= $form->field6md($model, 'private_key')->textInput(['placeholder' => '']) ?>
+        <?= $form->field4md($model, 'private_key')->textInput(['placeholder' => '']) ?>
 
-
+        <?= $form->field4md($model, 'order')->textInput(['placeholder' => '']) ?>
 
 
         <div class="hidden">
