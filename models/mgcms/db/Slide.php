@@ -31,7 +31,7 @@ class Slide extends \app\models\mgcms\db\AbstractRecord
         [['name', 'slider_id'], 'required'],
         [['body'], 'string'],
         [['file_id', 'slider_id' ,'order'], 'integer'],
-        [['name', 'header', 'subheader'], 'string', 'max' => 245]
+        [['name', 'header', 'subheader', 'link'], 'string', 'max' => 245]
     ];
   }
 
