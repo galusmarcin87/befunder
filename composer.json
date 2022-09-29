@@ -7,7 +7,7 @@
   "require": {
     "php": ">=7.3.0",
     "yiisoft/yii2": "~2.0.5",
-    "yiisoft/yii2-imagine": "2.1.0",
+    "yiisoft/yii2-imagine": "2.3.0",
     "yiisoft/yii2-bootstrap": "~2.0.0",
     "yiisoft/yii2-swiftmailer": "~2.0.0",
     "skeeks/yii2-assets-auto-compress": "*",

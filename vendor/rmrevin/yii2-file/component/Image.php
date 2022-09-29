@@ -85,10 +85,10 @@ class Image extends \yii\imagine\Image
      * @param string $filter
      * @return \Imagine\Image\ImageInterface
      */
-    public static function resize($filename, $width, $height, $filter = Imagine\Image\ImageInterface::FILTER_UNDEFINED)
+    public static function resize($image, $width, $height, $keepAspectRatio = true, $allowUpscaling = false, $filter = Imagine\Image\ImageInterface::FILTER_UNDEFINED)
     {
         return static::getImagine()
-            ->open(\Yii::getAlias($filename))
+            ->open(\Yii::getAlias($image))
             ->copy()
             ->resize(new Imagine\Image\Box($width, $height), $filter);
     }

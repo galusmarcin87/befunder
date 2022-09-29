@@ -1,6 +1,26 @@
 Yii Framework 2 imagine extension Change Log
 ================================================
 
+2.3.0 December 23, 2020
+-----------------------
+
+- Enh #28: `Image::thumbnail()` now accepts flag `ImageInterface::THUMBNAIL_FLAG_UPSCALE` to allow thumbnail upscaling. Since this option is only supported in imagine/imagine v1.0.0 or later, support for older version was dropped (yuniorsk)
+
+
+2.2.0 June 04, 2019
+-------------------
+
+- Enh #54: Updated imagine/imagine version constraint to allow using 1.1.0 (samdark)
+
+
+2.1.1 February 22, 2018
+-----------------------
+
+- Bug #35: Fixed incorrect `ceil()` call (Svyatoslav-S, samdark)
+- Enh #22: Added method `Image::resize()` to ease resizing images to fit certain dimensions (Renkas)
+- Enh #46: Updated Imagine dependency to include versions 0.7.x (klimov-paul)
+
+
 2.1.0 November 3, 2016
 ----------------------
 
