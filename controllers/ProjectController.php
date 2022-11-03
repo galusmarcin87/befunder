@@ -134,13 +134,13 @@ class ProjectController extends \app\components\mgcms\MgCmsController
             $payment->user_token = $hash;
             $payment->save();
 
-            if(Yii::$app->request->post('przelewy24')){
+            if (Yii::$app->request->post('przelewy24')) {
                 $przelewy24 = new Przelewy24(MgHelpers::getConfigParam('przelewy24'));
 
                 $transaction = $przelewy24->transaction([
                     'session_id' => $payment->id,
-                    'url_return' =>  Url::to(['project/buy-thank-you', 'hash' => $hash], true),
-                    'url_status' => Url::to(['project/notify', 'hash' => $hash], true),
+                    'url_return' => Url::to(['project/buy-thank-you', 'hash' => $hash], true),
+                    'url_status' => Url::to(['project/notify-przelewy24', 'hash' => $hash], true),
                     'amount' => $payment->amount * 100,
                     'description' => $project->name,
                     'email' => $this->getUserModel()->email,
@@ -151,7 +151,7 @@ class ProjectController extends \app\components\mgcms\MgCmsController
                 return $this->redirect($transaction->redirectUrl());
             }
 
-            if(Yii::$app->request->post('zonda')){
+            if (Yii::$app->request->post('zonda')) {
                 $pubkey = $project->public_key;
                 $privkey = $project->private_key;
 
@@ -160,7 +160,7 @@ class ProjectController extends \app\components\mgcms\MgCmsController
                 $response = $zondaApi->callApi('/payments', [
                     'destinationCurrency' => 'PLN',
                     'orderId' => $payment->id,
-                    'price' => (double) $plnToInvest,
+                    'price' => (double)$plnToInvest,
                     'notificationsUrl' => Url::to(['project/notify', 'hash' => $hash], true),
                 ], 'POST');
 
@@ -168,7 +168,7 @@ class ProjectController extends \app\components\mgcms\MgCmsController
                 $res = Json::decode($response);
                 if ($res['status'] == 'Ok' && $res['data']['url']) {
                     return $this->redirect($res['data']['url']);
-                }else{
+                } else {
                     echo '<pre>';
                     echo var_dump($res);
                     echo '</pre>';
@@ -246,9 +246,41 @@ class ProjectController extends \app\components\mgcms\MgCmsController
                 ->send();
 
             \Yii::info('mail ', 'own');
-        }catch(Exception $e){
+        } catch (Exception $e) {
             \Yii::info('error: ' . $e->getMessage(), 'own');
         }
+        return 'OK';
+    }
+
+    public function actionNotifyPrzelewy24($hash)
+    {
+        \Yii::info("notifyp24", 'own');
+        \Yii::info($hash, 'own');
+
+        $przelewy24 = new Przelewy24(MgHelpers::getConfigParam('przelewy24'));
+        $webhook = $przelewy24->handleWebhook();
+
+
+
+        $hashDecoded = JSON::decode(MgHelpers::decrypt($hash));
+        \Yii::info($hashDecoded, 'own');
+        $paymentId = $hashDecoded['paymentId'];
+        $userId = $hashDecoded['userId'];
+        $payment = Payment::find()->where(['id' => $paymentId, 'user_id' => $userId])->one();
+        if (!$payment) {
+            $this->throw404();
+        }
+
+       $verification =  $przelewy24->verify([
+            'session_id' => $payment->id,
+            'order_id' => $webhook->orderId(),
+            'amount' => $payment->amount * 100,
+        ]);
+
+        \Yii::info('verification:', 'own');
+        \Yii::info($verification, 'own');
+
+
         return 'OK';
     }
 
@@ -259,7 +291,7 @@ class ProjectController extends \app\components\mgcms\MgCmsController
             throw new \yii\web\HttpException(404, Yii::t('app', 'Not found'));
         }
 
-        MgHelpers::setFlashSuccess(Yii::t('db','Thank you for investment'));
+        MgHelpers::setFlashSuccess(Yii::t('db', 'Thank you for investment'));
         return $this->redirect('/');
         $hashExploded = explode(':', $hashDecrypt);
         $userId = $hashExploded[0];
