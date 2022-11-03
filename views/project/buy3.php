@@ -44,12 +44,17 @@ $model = $project;
             </table>
 
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-12   ">
                     <input hidden name="plnToInvest3" value="<?= $amount?>"/>
                     <input
                             type="submit"
-                            class="button" style="white-space: pre-wrap;"
+                            class="button" style="white-space: pre-wrap;" name="zonda"
                             value="<?= Yii::t('db', 'Go to Zonda Pay payment gateway to invest'); ?>"
+                    />
+                    <input
+                            type="submit"
+                            class="button" style="white-space: pre-wrap;" name="przelewy24"
+                            value="<?= Yii::t('db', 'Go to Przelewy24 payment gateway to invest'); ?>"
                     />
                 </div>
             </div>

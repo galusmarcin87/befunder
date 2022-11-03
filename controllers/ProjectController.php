@@ -22,6 +22,7 @@ use yii\web\Session;
 use FiberPay\FiberPayClient;
 use JWT;
 use yii\validators\EmailValidator;
+use Przelewy24\Przelewy24;
 
 class ProjectController extends \app\components\mgcms\MgCmsController
 {
@@ -133,30 +134,50 @@ class ProjectController extends \app\components\mgcms\MgCmsController
             $payment->user_token = $hash;
             $payment->save();
 
-            $pubkey = $project->public_key;
-            $privkey = $project->private_key;
+            if(Yii::$app->request->post('przelewy24')){
+                $przelewy24 = new Przelewy24(MgHelpers::getConfigParam('przelewy24'));
 
-            $zondaApi = new \app\components\ZondaPayAPI($pubkey, $privkey);
+                $transaction = $przelewy24->transaction([
+                    'session_id' => $payment->id,
+                    'url_return' =>  Url::to(['project/buy-thank-you', 'hash' => $hash], true),
+                    'url_status' => Url::to(['project/notify', 'hash' => $hash], true),
+                    'amount' => $payment->amount * 100,
+                    'description' => $project->name,
+                    'email' => $this->getUserModel()->email,
+                ]);
 
-            $response = $zondaApi->callApi('/payments', [
-                'destinationCurrency' => 'PLN',
-                'orderId' => $payment->id,
-                'price' => (double) $plnToInvest,
-                'notificationsUrl' => Url::to(['project/notify', 'hash' => $hash], true),
-            ], 'POST');
+                $transaction->token();
 
-
-            $res = Json::decode($response);
-            if ($res['status'] == 'Ok' && $res['data']['url']) {
-                return $this->redirect($res['data']['url']);
-            }else{
-                echo '<pre>';
-                echo var_dump($res);
-                echo '</pre>';
-                exit;
-                MgHelpers::setFlashError(Yii::t('db', 'Problem with initialize Zonda Pay'));
-                return $this->render('buy', []);
+                return $this->redirect($transaction->redirectUrl());
             }
+
+            if(Yii::$app->request->post('zonda')){
+                $pubkey = $project->public_key;
+                $privkey = $project->private_key;
+
+                $zondaApi = new \app\components\ZondaPayAPI($pubkey, $privkey);
+
+                $response = $zondaApi->callApi('/payments', [
+                    'destinationCurrency' => 'PLN',
+                    'orderId' => $payment->id,
+                    'price' => (double) $plnToInvest,
+                    'notificationsUrl' => Url::to(['project/notify', 'hash' => $hash], true),
+                ], 'POST');
+
+
+                $res = Json::decode($response);
+                if ($res['status'] == 'Ok' && $res['data']['url']) {
+                    return $this->redirect($res['data']['url']);
+                }else{
+                    echo '<pre>';
+                    echo var_dump($res);
+                    echo '</pre>';
+                    exit;
+                    MgHelpers::setFlashError(Yii::t('db', 'Problem with initialize Zonda Pay'));
+                    return $this->render('buy', []);
+                }
+            }
+
         }
 
 
@@ -237,6 +258,9 @@ class ProjectController extends \app\components\mgcms\MgCmsController
         if (!$hashDecrypt) {
             throw new \yii\web\HttpException(404, Yii::t('app', 'Not found'));
         }
+
+        MgHelpers::setFlashSuccess(Yii::t('db','Thank you for investment'));
+        return $this->redirect('/');
         $hashExploded = explode(':', $hashDecrypt);
         $userId = $hashExploded[0];
         $projectId = $hashExploded[1];

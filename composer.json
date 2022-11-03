@@ -33,7 +33,8 @@
     "himiklab/yii2-recaptcha-widget" : "*",
     "fiberpay/fiberpay-php":  "0.1.4",
     "firebase/php-jwt": "2.0.0",
-    "guzzlehttp/guzzle": "6.5.5"
+    "guzzlehttp/guzzle": "6.5.5",
+    "mnastalski/przelewy24-php": "v0.1.1"
 
   },
   "require-dev": {

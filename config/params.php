@@ -31,4 +31,9 @@ return [
         'fiberIdApiKey' => 'RvPxZiLGfFVQ3nTx',
         'fiberIdSecret' => 'eafb0ee4ae45a56ec9fc093f4f8a63d3ccba7995557b704d7cf93b3451624d22'
     ],
+    'przelewy24' => [
+        'merchant_id' => '67545',
+        'crc' => '61ac088e432de9ee',
+        'live' => false
+    ]
 ];

@@ -1537,20 +1537,20 @@
         },
         {
             "name": "kartik-v/bootstrap-fileinput",
-            "version": "v5.5.1",
-            "version_normalized": "5.5.1.0",
+            "version": "v5.5.2",
+            "version_normalized": "5.5.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/bootstrap-fileinput.git",
-                "reference": "213e0887d254a9c6fb028ff817abd8af7e734e78"
+                "reference": "35c29cd9fd5bc47eae5238feaabee95b2d7efe3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/213e0887d254a9c6fb028ff817abd8af7e734e78",
-                "reference": "213e0887d254a9c6fb028ff817abd8af7e734e78",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/35c29cd9fd5bc47eae5238feaabee95b2d7efe3c",
+                "reference": "35c29cd9fd5bc47eae5238feaabee95b2d7efe3c",
                 "shasum": ""
             },
-            "time": "2022-08-17T07:53:35+00:00",
+            "time": "2022-10-13T06:16:39+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1591,7 +1591,7 @@
             ],
             "support": {
                 "issues": "https://github.com/kartik-v/bootstrap-fileinput/issues",
-                "source": "https://github.com/kartik-v/bootstrap-fileinput/tree/v5.5.1"
+                "source": "https://github.com/kartik-v/bootstrap-fileinput/tree/v5.5.2"
             },
             "funding": [
                 {
@@ -2790,24 +2790,24 @@
         },
         {
             "name": "kartik-v/yii2-tabs-x",
-            "version": "v1.2.8",
-            "version_normalized": "1.2.8.0",
+            "version": "v1.2.9",
+            "version_normalized": "1.2.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-tabs-x.git",
-                "reference": "c968409e2820339b7084890cb018376687fed408"
+                "reference": "20e2a2b41ca43e09574caab408004e5ac4e00a7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-tabs-x/zipball/c968409e2820339b7084890cb018376687fed408",
-                "reference": "c968409e2820339b7084890cb018376687fed408",
+                "url": "https://api.github.com/repos/kartik-v/yii2-tabs-x/zipball/20e2a2b41ca43e09574caab408004e5ac4e00a7d",
+                "reference": "20e2a2b41ca43e09574caab408004e5ac4e00a7d",
                 "shasum": ""
             },
             "require": {
                 "kartik-v/bootstrap-tabs-x": "~1.3",
                 "kartik-v/yii2-krajee-base": ">=3.0.0"
             },
-            "time": "2021-09-20T06:56:42+00:00",
+            "time": "2022-10-15T11:14:01+00:00",
             "type": "yii2-extension",
             "extra": {
                 "branch-alias": {
@@ -2844,7 +2844,7 @@
             ],
             "support": {
                 "issues": "https://github.com/kartik-v/yii2-tabs-x/issues",
-                "source": "https://github.com/kartik-v/yii2-tabs-x/tree/v1.2.8"
+                "source": "https://github.com/kartik-v/yii2-tabs-x/tree/v1.2.9"
             },
             "install-path": "../kartik-v/yii2-tabs-x"
         },
@@ -4372,6 +4372,58 @@
             "install-path": "../markbaker/matrix"
         },
         {
+            "name": "mnastalski/przelewy24-php",
+            "version": "v0.1.1",
+            "version_normalized": "0.1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mnastalski/przelewy24-php.git",
+                "reference": "56594fab5d1838fa471b8b82c3fdd7673a27b441"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mnastalski/przelewy24-php/zipball/56594fab5d1838fa471b8b82c3fdd7673a27b441",
+                "reference": "56594fab5d1838fa471b8b82c3fdd7673a27b441",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.4|^7.0",
+                "php": ">=7.1.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0"
+            },
+            "time": "2022-06-16T11:57:36+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Przelewy24\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mateusz Nastalski",
+                    "homepage": "https://nastalski.pl"
+                }
+            ],
+            "description": "Przelewy24 PHP library",
+            "homepage": "https://github.com/mnastalski/przelewy24-php",
+            "keywords": [
+                "Przelewy24",
+                "payment"
+            ],
+            "support": {
+                "issues": "https://github.com/mnastalski/przelewy24-php/issues",
+                "source": "https://github.com/mnastalski/przelewy24-php/tree/v0.1.1"
+            },
+            "install-path": "../mnastalski/przelewy24-php"
+        },
+        {
             "name": "monolog/monolog",
             "version": "2.8.0",
             "version_normalized": "2.8.0.0",
@@ -4880,23 +4932,23 @@
         },
         {
             "name": "mrclay/minify",
-            "version": "3.0.12",
-            "version_normalized": "3.0.12.0",
+            "version": "3.0.13",
+            "version_normalized": "3.0.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mrclay/minify.git",
-                "reference": "1962d3614c7ee1795a9fb74e49e603646b34207d"
+                "reference": "ae5b9f0bfb5f2ab0bcba45289268328be27a7ae6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mrclay/minify/zipball/1962d3614c7ee1795a9fb74e49e603646b34207d",
-                "reference": "1962d3614c7ee1795a9fb74e49e603646b34207d",
+                "url": "https://api.github.com/repos/mrclay/minify/zipball/ae5b9f0bfb5f2ab0bcba45289268328be27a7ae6",
+                "reference": "ae5b9f0bfb5f2ab0bcba45289268328be27a7ae6",
                 "shasum": ""
             },
             "require": {
                 "ext-pcre": "*",
                 "intervention/httpauth": "^2.0|^3.0",
-                "marcusschwarz/lesserphp": "^0.5.1",
+                "marcusschwarz/lesserphp": "^0.5.5",
                 "monolog/monolog": "~1.1|~2.0",
                 "mrclay/jsmin-php": "~2",
                 "mrclay/props-dic": "^2.2|^3.0",
@@ -4914,7 +4966,7 @@
                 "firephp/firephp-core": "Use FirePHP for Log messages",
                 "meenie/javascript-packer": "Keep track of the Packer PHP port using Composer"
             },
-            "time": "2022-05-14T11:11:27+00:00",
+            "time": "2022-10-02T21:12:43+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -4943,7 +4995,7 @@
             "support": {
                 "email": "minify@googlegroups.com",
                 "issues": "https://github.com/mrclay/minify/issues",
-                "source": "https://github.com/mrclay/minify/tree/3.0.12",
+                "source": "https://github.com/mrclay/minify/tree/3.0.13",
                 "wiki": "https://github.com/mrclay/minify/blob/master/docs"
             },
             "install-path": "../mrclay/minify"
@@ -7938,17 +7990,17 @@
         },
         {
             "name": "symfony/console",
-            "version": "v4.4.45",
-            "version_normalized": "4.4.45.0",
+            "version": "v4.4.48",
+            "version_normalized": "4.4.48.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "28b77970939500fb04180166a1f716e75a871ef8"
+                "reference": "8e70c1cab07ac641b885ce80385b9824a293c623"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/28b77970939500fb04180166a1f716e75a871ef8",
-                "reference": "28b77970939500fb04180166a1f716e75a871ef8",
+                "url": "https://api.github.com/repos/symfony/console/zipball/8e70c1cab07ac641b885ce80385b9824a293c623",
+                "reference": "8e70c1cab07ac641b885ce80385b9824a293c623",
                 "shasum": ""
             },
             "require": {
@@ -7983,7 +8035,7 @@
                 "symfony/lock": "",
                 "symfony/process": ""
             },
-            "time": "2022-08-17T14:50:19+00:00",
+            "time": "2022-10-26T16:02:45+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -8011,7 +8063,7 @@
             "description": "Eases the creation of beautiful and testable command line interfaces",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/console/tree/v4.4.45"
+                "source": "https://github.com/symfony/console/tree/v4.4.48"
             },
             "funding": [
                 {
@@ -9405,17 +9457,17 @@
         },
         {
             "name": "symfony/string",
-            "version": "v5.4.12",
-            "version_normalized": "5.4.12.0",
+            "version": "v5.4.15",
+            "version_normalized": "5.4.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "2fc515e512d721bf31ea76bd02fe23ada4640058"
+                "reference": "571334ce9f687e3e6af72db4d3b2a9431e4fd9ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/2fc515e512d721bf31ea76bd02fe23ada4640058",
-                "reference": "2fc515e512d721bf31ea76bd02fe23ada4640058",
+                "url": "https://api.github.com/repos/symfony/string/zipball/571334ce9f687e3e6af72db4d3b2a9431e4fd9ed",
+                "reference": "571334ce9f687e3e6af72db4d3b2a9431e4fd9ed",
                 "shasum": ""
             },
             "require": {
@@ -9435,7 +9487,7 @@
                 "symfony/translation-contracts": "^1.1|^2",
                 "symfony/var-exporter": "^4.4|^5.0|^6.0"
             },
-            "time": "2022-08-12T17:03:11+00:00",
+            "time": "2022-10-05T15:16:54+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -9474,7 +9526,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v5.4.12"
+                "source": "https://github.com/symfony/string/tree/v5.4.15"
             },
             "funding": [
                 {
