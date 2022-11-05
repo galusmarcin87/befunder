@@ -277,10 +277,8 @@ class ProjectController extends \app\components\mgcms\MgCmsController
             'amount' => $payment->amount * 100,
         ]);
 
-        $verification = unserialize($verificationRes);
-
         \Yii::info('verification:', 'own');
-        \Yii::info(json_encode($verification), 'own');
+        \Yii::info($verificationRes, 'own');
 
 
         return 'OK';
