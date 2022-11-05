@@ -280,7 +280,7 @@ class ProjectController extends \app\components\mgcms\MgCmsController
         $verification = unserialize($verificationRes);
 
         \Yii::info('verification:', 'own');
-        \Yii::info($verification, 'own');
+        \Yii::info(json_encode($verification), 'own');
 
 
         return 'OK';
