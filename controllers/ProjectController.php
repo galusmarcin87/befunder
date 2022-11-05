@@ -271,11 +271,13 @@ class ProjectController extends \app\components\mgcms\MgCmsController
             $this->throw404();
         }
 
-       $verification =  $przelewy24->verify([
+       $verificationRes =  $przelewy24->verify([
             'session_id' => $payment->id,
             'order_id' => $webhook->orderId(),
             'amount' => $payment->amount * 100,
         ]);
+
+        $verification = unserialize($verificationRes);
 
         \Yii::info('verification:', 'own');
         \Yii::info($verification, 'own');
