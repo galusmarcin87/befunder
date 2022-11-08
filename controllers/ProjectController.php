@@ -257,7 +257,8 @@ class ProjectController extends \app\components\mgcms\MgCmsController
         \Yii::info("notifyp24", 'own');
         \Yii::info($hash, 'own');
 
-        $przelewy24 = new Przelewy24(MgHelpers::getConfigParam('przelewy24'));
+        $p24Config = MgHelpers::getConfigParam('przelewy24');
+        $przelewy24 = new Przelewy24($p24Config);
         $webhook = $przelewy24->handleWebhook();
 
 
@@ -275,6 +276,8 @@ class ProjectController extends \app\components\mgcms\MgCmsController
             'session_id' => $payment->id,
             'order_id' => $webhook->orderId(),
             'amount' => $payment->amount * 100,
+           'crc' => $p24Config['crc'],
+           'currency' => 'PLN'
         ]);
 
         \Yii::info('verification:', 'own');
