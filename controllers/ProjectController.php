@@ -142,7 +142,7 @@ class ProjectController extends \app\components\mgcms\MgCmsController
                     'session_id' => $payment->id,
                     'url_return' => Url::to(['project/buy-thank-you', 'hash' => $hash], true),
                     'url_status' => Url::to(['project/notify-przelewy24', 'hash' => $hash], true),
-                    'amount' => $payment->amount * 100,
+                    'amount' => (int)($payment->amount * 100),
                     'description' => $project->name,
                     'email' => $this->getUserModel()->email,
                 ]);
