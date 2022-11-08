@@ -261,6 +261,8 @@ class ProjectController extends \app\components\mgcms\MgCmsController
         $przelewy24 = new Przelewy24($p24Config);
         $webhook = $przelewy24->handleWebhook();
 
+        \Yii::info("webhook", 'own');
+        \Yii::info($webhook, 'own');
 
 
         $hashDecoded = JSON::decode(MgHelpers::decrypt($hash));
