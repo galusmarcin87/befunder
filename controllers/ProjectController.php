@@ -23,6 +23,7 @@ use FiberPay\FiberPayClient;
 use JWT;
 use yii\validators\EmailValidator;
 use Przelewy24\Przelewy24;
+use Przelewy24\Exceptions\Przelewy24Exception;
 
 class ProjectController extends \app\components\mgcms\MgCmsController
 {
@@ -274,14 +275,20 @@ class ProjectController extends \app\components\mgcms\MgCmsController
             $this->throw404();
         }
 
-       $verificationRes =  $przelewy24->verify([
-            'session_id' => $payment->id,
-            'order_id' => $webhook->orderId(),
-            'amount' => $payment->amount * 100,
-           'crc' => $p24Config['crc'],
-           'currency' => 'PLN'
-        ]);
+        try {
 
+            $verificationRes = $przelewy24->verify([
+                'session_id' => $payment->id,
+                'order_id' => $webhook->orderId(),
+                'amount' => $payment->amount * 100,
+                'crc' => $p24Config['crc'],
+                'currency' => 'PLN'
+            ]);
+
+        } catch (Przelewy24Exception $e) {
+            \Yii::info('error:', 'own');
+            \Yii::info($e, 'own');
+        }
         \Yii::info('verification:', 'own');
         \Yii::info($verificationRes, 'own');
 
