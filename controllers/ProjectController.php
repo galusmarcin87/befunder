@@ -142,7 +142,7 @@ class ProjectController extends \app\components\mgcms\MgCmsController
                     'session_id' => $payment->id,
                     'url_return' => Url::to(['project/buy-thank-you', 'hash' => $hash], true),
                     'url_status' => Url::to(['project/notify-przelewy24', 'hash' => $hash], true),
-                    'amount' => (int)($payment->amount * 100),
+                    'amount' => $payment->amount * 100,
                     'description' => $project->name,
                     'email' => $this->getUserModel()->email,
                 ]);
@@ -280,7 +280,7 @@ class ProjectController extends \app\components\mgcms\MgCmsController
             $verifyData = [
                 'session_id' => $payment->id,
                 'order_id' => $webhook->orderId(),
-                'amount' => $payment->amount * 100,
+                'amount' => (int)($payment->amount * 100),
 //                'crc' => $p24Config['crc'],
 //                'currency' => 'PLN'
             ];
