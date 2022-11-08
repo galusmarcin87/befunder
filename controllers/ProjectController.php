@@ -277,13 +277,16 @@ class ProjectController extends \app\components\mgcms\MgCmsController
 
         try {
 
-            $verificationRes = $przelewy24->verify([
+            $verifyData = [
                 'session_id' => $payment->id,
                 'order_id' => $webhook->orderId(),
                 'amount' => $payment->amount * 100,
-                'crc' => $p24Config['crc'],
-                'currency' => 'PLN'
-            ]);
+//                'crc' => $p24Config['crc'],
+//                'currency' => 'PLN'
+            ];
+            \Yii::info('verifyData:', 'own');
+            \Yii::info($verifyData, 'own');
+            $verificationRes = $przelewy24->verify($verifyData);
 
         } catch (Przelewy24Exception $e) {
             \Yii::info('error:', 'own');
