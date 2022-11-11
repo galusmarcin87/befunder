@@ -299,7 +299,10 @@ class ProjectController extends \app\components\mgcms\MgCmsController
         \Yii::info(gettype($verificationRes), 'own');
         \Yii::info($verificationRes, 'own');
 
-        \Yii::info(get_class_methods($verificationRes), 'own');
+
+        $verified = str_contains((string)$verificationRes, '{s:8:"' . "\0" . '*' . "\0" . 'error";s:1:"0";s:15:"' . "\0" . '*' . "\0" . 'errorMessage";N;}');
+
+        \Yii::info($verified, 'own');
 
         return 'OK';
     }
