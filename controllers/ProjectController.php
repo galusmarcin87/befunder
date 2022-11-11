@@ -93,7 +93,7 @@ class ProjectController extends \app\components\mgcms\MgCmsController
             ->where(['status' => Project::STATUS_ACTIVE, 'id' => $id])
             ->one();
 
-        if (!$project->public_key || !$project->private_key) {
+        if (!$project->public_key || !$project->private_key || !$project->przelewy24_crc || !$project->przelewy24_merchant_id) {
             MgHelpers::setFlashError(Yii::t('db', 'Project does not have payment configured'));
             return $this->back();
         }
@@ -136,7 +136,13 @@ class ProjectController extends \app\components\mgcms\MgCmsController
             $payment->save();
 
             if (Yii::$app->request->post('przelewy24')) {
-                $przelewy24 = new Przelewy24(MgHelpers::getConfigParam('przelewy24'));
+                $przelewy24ConfigParams = MgHelpers::getConfigParam('przelewy24');
+                $przelewy24Config = [
+                    'live' => $przelewy24ConfigParams['live'],
+                    'merchant_id' => $project->przelewy24_merchant_id,
+                    'crc' => $project->przelewy24_crc
+                ];
+                $przelewy24 = new Przelewy24($przelewy24Config);
 
                 $transaction = $przelewy24->transaction([
                     'session_id' => $payment->id,
@@ -261,12 +267,7 @@ class ProjectController extends \app\components\mgcms\MgCmsController
         \Yii::info("post", 'own');
         \Yii::info(Yii::$app->request->post(), 'own');
 
-        $p24Config = MgHelpers::getConfigParam('przelewy24');
-        $przelewy24 = new Przelewy24($p24Config);
-        $webhook = $przelewy24->handleWebhook();
 
-        \Yii::info("webhook", 'own');
-        \Yii::info($webhook, 'own');
 
 
         $hashDecoded = JSON::decode(MgHelpers::decrypt($hash));
@@ -277,6 +278,20 @@ class ProjectController extends \app\components\mgcms\MgCmsController
         if (!$payment) {
             $this->throw404();
         }
+
+        $przelewy24ConfigParams = MgHelpers::getConfigParam('przelewy24');
+        $przelewy24Config = [
+            'live' => $przelewy24ConfigParams['live'],
+            'merchant_id' => $payment->project->przelewy24_merchant_id,
+            'crc' => $payment->project->przelewy24_crc
+        ];
+        $przelewy24 = new Przelewy24($przelewy24Config);
+
+        $webhook = $przelewy24->handleWebhook();
+
+        \Yii::info("webhook", 'own');
+        \Yii::info($webhook, 'own');
+
 
         try {
 

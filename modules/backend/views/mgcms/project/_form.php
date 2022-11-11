@@ -180,6 +180,10 @@ yii\jui\JuiAsset::register($this);
 
         <?= $form->field4md($model, 'order')->textInput(['placeholder' => '']) ?>
 
+        <?= $form->field4md($model, 'przelewy24_merchant_id')->textInput(['placeholder' => '']) ?>
+
+        <?= $form->field4md($model, 'przelewy24_crc')->textInput(['placeholder' => '']) ?>
+
 
         <div class="hidden">
             <?= $form->field3md($model, 'fiber_collect_id')->textInput(['placeholder' => '']) ?>

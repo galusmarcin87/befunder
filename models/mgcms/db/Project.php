@@ -49,6 +49,8 @@ use yii\helpers\Html;
  * @property string $public_key
  * @property string $private_key
  * @property integer $order
+ * @property string $przelewy24_crc
+ * @property integer $przelewy24_merchant_id
  *
  * @property \app\models\mgcms\db\Bonus[] $bonuses
  * @property \app\models\mgcms\db\Payment[] $payments
@@ -76,8 +78,8 @@ class Project extends \app\models\mgcms\db\AbstractRecord
         return [
             [['name', 'file_id'], 'required'],
             [['gps_lat', 'gps_long', 'money', 'money_full', 'percentage', 'percentage_presale_bonus'], 'number'],
-            [['lead', 'text', 'text2', 'buy_token_info', 'fiber_collect_id', 'iban', 'pay_description', 'pay_name'], 'string'],
-            [['file_id', 'token_value', 'token_to_sale', 'token_minimal_buy', 'token_left', 'flag_id', 'created_by', 'value', 'order'], 'integer'],
+            [['lead', 'text', 'text2', 'buy_token_info', 'fiber_collect_id', 'iban', 'pay_description', 'pay_name', 'przelewy24_crc'], 'string'],
+            [['file_id', 'token_value', 'token_to_sale', 'token_minimal_buy', 'token_left', 'flag_id', 'created_by', 'value', 'order', 'przelewy24_merchant_id'], 'integer'],
             [['date_presale_start', 'date_presale_end', 'date_crowdsale_start', 'date_crowdsale_end', 'date_realization_profit'], 'safe'],
             [['name', 'localization', 'whitepaper', 'www', 'token_blockchain', 'public_key', 'private_key'], 'string', 'max' => 245],
             [['status', 'investition_time', 'token_currency'], 'string', 'max' => 45]
