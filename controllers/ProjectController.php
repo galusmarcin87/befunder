@@ -299,7 +299,7 @@ class ProjectController extends \app\components\mgcms\MgCmsController
         \Yii::info(gettype($verificationRes), 'own');
         \Yii::info($verificationRes, 'own');
 
-        \Yii::info(get_object_vars($verificationRes), 'own');
+        \Yii::info(get_class_methods($verificationRes), 'own');
 
         return 'OK';
     }
