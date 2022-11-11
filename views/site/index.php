@@ -14,7 +14,7 @@ use app\models\mgcms\db\Project;
     <div class="container">
         <?= $this->render('/common/projects') ?>
         <div class="text-center">
-            <a href="<?= \yii\helpers\Url::to(['project/index']) ?>"
+            <a href="<?= \yii\helpers\Url::to(['/project']) ?>"
                class="button"> <?= Yii::t('db', 'all projects'); ?> </a>
         </div>
     </div>

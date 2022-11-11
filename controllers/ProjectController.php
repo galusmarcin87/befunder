@@ -53,9 +53,9 @@ class ProjectController extends \app\components\mgcms\MgCmsController
      *
      * @return string
      */
-    public function actionView($name)
+    public function actionView($id)
     {
-        $model = Project::find()->where(['name' => $name])->one();
+        $model = Project::find()->where(['id' => $id])->one();
         if (!$model) {
             throw new \yii\web\HttpException(404, Yii::t('app', 'Not found'));
         }

@@ -30,8 +30,10 @@ return [
         [
             'class' => 'geertw\Yii2\TranslatableUrlRule\TranslatableUrlRule',
             'patterns' => [
-                'en' => '/project/<name>',
-                'pl' => '/projekt/<name>',
+                'en' => '/project/<id>',
+                'pl' => '/projekt/<id>',
+                'de' => '/entwurf',
+                'fr' => '/motif'
             ],
             'route' => '/project/view',
         ],
@@ -40,6 +42,8 @@ return [
             'patterns' => [
                 'en' => '/projects',
                 'pl' => '/projekty',
+                'de' => '/projekte',
+                'fr' => '/projets',
             ],
             'route' => '/project',
         ],
