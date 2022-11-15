@@ -150,7 +150,7 @@ class ProjectController extends \app\components\mgcms\MgCmsController
                     'url_status' => Url::to(['project/notify-przelewy24', 'hash' => $hash], true),
                     'amount' => $payment->amount * 100,
                     'description' => $project->name,
-                    'email' => $this->getUserModel()->email,
+                    'email' => $this->getUserModel()->username,
                 ]);
 
                 $transaction->token();
