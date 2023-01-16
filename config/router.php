@@ -25,17 +25,26 @@ return [
         '/gallery/<slug>' => '/gallery/view',
         '/my-account' => '/site/account',
         '/tag/<tagSlug>' => '/article/tag',
-        '/buy/<slug>' => '/project/buy',
         '/login' => '/site/login',
         [
             'class' => 'geertw\Yii2\TranslatableUrlRule\TranslatableUrlRule',
             'patterns' => [
                 'en' => '/project/<id>',
                 'pl' => '/projekt/<id>',
-                'de' => '/entwurf',
-                'fr' => '/motif'
+                'de' => '/entwurft/<id>',
+                'fr' => '/motift/<id>'
             ],
             'route' => '/project/view',
+        ],
+        [
+            'class' => 'geertw\Yii2\TranslatableUrlRule\TranslatableUrlRule',
+            'patterns' => [
+                'en' => '/project/buy/<id>',
+                'pl' => '/projekt/kup/<id>',
+                'de' => '/entwurft/kaufen/<id>',
+                'fr' => '/motift/acheter/<id>'
+            ],
+            'route' => '/project/buy',
         ],
         [
             'class' => 'geertw\Yii2\TranslatableUrlRule\TranslatableUrlRule',
